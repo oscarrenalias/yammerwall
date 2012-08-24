@@ -1,3 +1,29 @@
 .yam {
 	margin: 10px;
+	width: 700px;
+}
+
+.yam-container {
+
+}
+
+.yam-mugshot {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 48px;
+	height: 48px;
+	display: block;
+	width: 48px;
+	float:left;
+}
+
+.yam-body {
+	word-wrap: break-word;
+	position: relative;
+	top: 0px;
+	left: 3px;
+	padding: 0px;
+	margin: 0px;
+	float:left;
 }

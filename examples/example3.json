@@ -1,0 +1,123 @@
+[
+   {
+      "id":"205450547",
+      "data":{
+         "data":{
+            "messages":[
+               {
+                  "message_type":"system",
+                  "network_id":538,
+                  "thread_id":205450547,
+                  "url":"https://www.yammer.com/api/v1/messages/205450547",
+                  "replied_to_id":null,
+                  "chat_client_sequence":null,
+                  "client_url":"https://www.yammer.com/",
+                  "client_type":"Web",
+                  "created_at":"2012/08/24 11:15:21 +0000",
+                  "sender_id":1489176382,
+                  "system_message":true,
+                  "body":{
+                     "parsed":"(Application Technical Architect) has [[tag:5099]] the Accenture network. Take a moment to welcome Jyrki.",
+                     "rich":"(Application Technical Architect) has <span class='yammer-object' data-yammer-object='tag:5099' data-resource-id='5099' data-resource-model='tag'>#<a href='https://www.yammer.com/accenture.com/topics/839981'>joined</a></span> the Accenture network. Take a moment to welcome Jyrki.",
+                     "plain":"(Application Technical Architect) has #joined the Accenture network. Take a moment to welcome Jyrki."
+                  },
+                  "direct_message":false,
+                  "attachments":[
+
+                  ],
+                  "privacy":"public",
+                  "id":205450547,
+                  "sender_type":"user",
+                  "liked_by":{
+                     "names":[
+
+                     ],
+                     "count":0
+                  },
+                  "web_url":"https://www.yammer.com/accenture.com/messages/205450547"
+               }
+            ],
+            "meta":{
+               "ymodules":[
+
+               ],
+               "current_user_id":2259588,
+               "followed_references":[
+
+               ],
+               "show_billing_banner":false,
+               "requested_poll_interval":180
+            },
+            "references":[
+               {
+                  "normalized_name":"joined",
+                  "url":"https://www.yammer.com/api/v1/topics/839981",
+                  "type":"topic",
+                  "permalink":"joined",
+                  "name":"Joined",
+                  "id":839981,
+                  "web_url":"https://www.yammer.com/accenture.com/topics/839981"
+               },
+               {
+                  "url":"https://www.yammer.com/api/v1/tags/5099",
+                  "type":"tag",
+                  "name":"joined",
+                  "id":5099,
+                  "web_url":"https://www.yammer.com/accenture.com/topics/839981"
+               },
+               {
+                  "has_attachments":false,
+                  "url":"https://www.yammer.com/api/v1/messages/in_thread/205450547",
+                  "type":"thread",
+                  "thread_starter_id":205450547,
+                  "direct_message":false,
+                  "privacy":"public",
+                  "stats":{
+                     "updates":0,
+                     "first_reply_at":null,
+                     "shares":0,
+                     "first_reply_id":null,
+                     "latest_reply_at":"2012/08/24 11:15:21 +0000",
+                     "latest_reply_id":205450547
+                  },
+                  "topics":[
+                     {
+                        "type":"topic",
+                        "id":839981
+                     }
+                  ],
+                  "id":205450547,
+                  "web_url":"https://www.yammer.com/accenture.com#/Threads/show?threadId=205450547"
+               },
+               {
+                  "activated_at":"2012/08/24 11:15:21 +0000",
+                  "url":"https://www.yammer.com/api/v1/users/1489176382",
+                  "type":"user",
+                  "mugshot_url":"https://mug0.assets-yammer.com/mugshot/images/48x48/no_photo.png",
+                  "full_name":"Jyrki Aarnos",
+                  "job_title":"Application Technical Architect",
+                  "state":"active",
+                  "name":"jyrkiaarnos",
+                  "stats":{
+                     "updates":0,
+                     "followers":0,
+                     "following":0
+                  },
+                  "id":1489176382,
+                  "web_url":"https://www.yammer.com/accenture.com/users/jyrkiaarnos"
+               }
+            ],
+            "threaded_extended":{
+
+            }
+         },
+         "type":"message"
+      },
+      "channel":"/feeds/MTo1Mzg6NTM4/primary"
+   },
+   {
+      "id":"12",
+      "successful":true,
+      "channel":"/meta/connect"
+   }
+]

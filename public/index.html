@@ -1,16 +1,3 @@
-<html>
- <head>
-  <title>Index</title>
-
- </head>
- <body>
-    <div id="yams">
-      <!-- content goes here -->
-    </div>
-</body>
-</html>
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,10 +16,13 @@
         //var content = document.getElementById('content');
         //content.innerHTML += yam;
         var yams = data.messages;
+        var users = data.users;
         var newYams = "";
         for(i=0; i < yams.length; i++) {
           var yam = yams[i];
-          newYams += ui.formatYam(yam); 
+          newYams += ui.formatYam(yam, users.filter(function(user) {
+            return(user.id == yam.sender_id);
+          })); 
         }
         var current = $('#yams').html();
         $('#yams').html(current + newYams);
@@ -41,8 +31,19 @@
       });  
 
       var ui = {
-        formatYam: function(yam) {
-          var yamHtml = '<div class="yam">' + yam.body.rich + "</div>\n";
+        formatYam: function(yam, users) {
+          var user = "";
+          
+          // to prevent a situation where the user was not found
+          if(users.length==0)
+            user = { "mugshot_url": "no-link" }
+          else
+            user = users[0];
+
+          var yamHtml = '<div class="yam yam-container">'; 
+          yamHtml += '<div class="yam-mugshot"><img src="' + user.mugshot_url + '" alt="mugshot" /></div>';
+          yamHtml += '<div class="yam-body">' + yam.body.rich + "</div>";
+          yamHtml += "</div>\n";
           return(yamHtml);
         }
       }
@@ -83,7 +84,7 @@
       </div>
     </div>
 
-    <div class="yams">
+    <div id="yams">
       <span class="waiting">
         <img src="images/ajax-loader.gif" alt="Spinner" />
         Waiting for yams...

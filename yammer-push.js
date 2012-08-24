@@ -160,6 +160,13 @@ var request = https.request(options, function(response) {
                                         // there was post data
                                         console.log("There was some data!");
                                         // broadcast to all connected clients
+
+                                        // extracts the list of users from the references section
+                                        var processUsers = function(references) {
+                                            return(references.filter(function(item) {
+                                                return(item.type == "user");
+                                            }));
+                                        }
                                         
                                         for(i=0; i<connectionResponse.length; i++) {
                                             console.log("Processing response with id = " + connectionResponse[i].id);
@@ -167,17 +174,13 @@ var request = https.request(options, function(response) {
                                             if(connectionResponse[i].data) {
                                                 // not all messages have data to process
                                                 if(connectionResponse[i].data.type == "message") {
-                                                    var messages = connectionResponse[i].data.data.messages;
-                                                    /*for(j=0; j<messages.length; j++) {
-                                                        // process each message
-                                                        io.sockets.in('yammer').emit(
-                                                          'yam',  // message topic
-                                                          { "type": "message", "message": messages[j] } // message body
-                                                        );
-                                                    }*/
+
                                                     io.sockets.in("yammer").emit(
                                                         "yam",
-                                                        { "type": "messages", "messages": messages }
+                                                        { 
+                                                            "messages": connectionResponse[i].data.data.messages, 
+                                                            "users": processUsers(connectionResponse[i].data.data.references) 
+                                                        }
                                                     );
                                                 }
                                                 else {
