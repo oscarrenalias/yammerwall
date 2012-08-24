@@ -20,10 +20,9 @@
 
 .yam-body {
 	word-wrap: break-word;
-	position: relative;
 	top: 0px;
-	left: 3px;
 	padding-left: 50px;
 	margin: 0px;
 	float:left;
+	min-height: 55px;
 }
