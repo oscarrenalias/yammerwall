@@ -1,0 +1,27 @@
+<html>
+ <head>
+  <title>Index</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript">
+  var socket = io.connect('http://' + location.hostname);
+   socket.on('yam', function(data) {
+    //var content = document.getElementById('content');
+    //content.innerHTML += yam;
+    var yams = data.messages;
+    var newYams = "";
+    for(i=0; i < yams.length; i++) {
+      var yam = yams[i];
+      newYams += "<p>" + yam.body.rich + "</p>\n";
+    }
+    var current = $('#yams').html();
+    $('#yams').html(current + newYams);
+   });  
+ </script>
+ </head>
+ <body>
+    <div id="yams">
+      <!-- content goes here -->
+    </div>
+</body>
+</html>

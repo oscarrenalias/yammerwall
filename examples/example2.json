@@ -1,0 +1,138 @@
+[
+  {
+    "id":"205085977",
+    "data":{
+      "data":{
+        "threaded_extended":{
+
+        },
+        "references":[
+          {
+            "url":"https://www.yammer.com/api/v1/topics/28209",
+            "name":"Yammer",
+            "normalized_name":"yammer",
+            "permalink":"yammer",
+            "web_url":"https://www.yammer.com/NETWORK/topics/28209",
+            "id":28209,
+            "type":"topic"
+          },
+          {
+            "topics":[
+              {
+                "id":28209,
+                "type":"topic"
+              }
+            ],
+            "has_attachments":false,
+            "url":"https://www.yammer.com/api/v1/messages/in_thread/204831346",
+            "privacy":"public",
+            "thread_starter_id":204831346,
+            "web_url":"https://www.yammer.com/NETWORK#/Threads/show?threadId=204831346",
+            "id":204831346,
+            "direct_message":false,
+            "stats":{
+              "first_reply_at":"2012/08/23 07:44:02 +0000",
+              "updates":2,
+              "shares":0,
+              "latest_reply_at":"2012/08/23 12:49:55 +0000",
+              "first_reply_id":204992845,
+              "latest_reply_id":205085977
+            },
+            "type":"thread"
+          },
+          {
+            "activated_at":"2011/06/21 19:05:17 +0000",
+            "url":"https://www.yammer.com/api/v1/users/5731065",
+            "name":"kenmarchant",
+            "job_title":"Consultant",
+            "mugshot_url":"https://mug0.assets-yammer.com/mugshot/images/48x48/bnGfp9Mk5Q9PMMcd8jhzqpJxfdRPblVT",
+            "web_url":"https://www.yammer.com/NETWORK/users/kenmarchant",
+            "id":5731065,
+            "full_name":"Ken Marchant",
+            "state":"active",
+            "stats":{
+              "following":2,
+              "updates":29,
+              "followers":3
+            },
+            "type":"user"
+          },
+          {
+            "system_message":false,
+            "sender_id":5731065,
+            "thread_id":204831346,
+            "url":"https://www.yammer.com/api/v1/messages/204831346",
+            "body":{
+              "plain":"#yammer is now supported through Hootsuite"
+            },
+            "replied_to_id":null,
+            "network_id":538,
+            "sender_type":"user",
+            "message_type":"update",
+            "web_url":"https://www.yammer.com/NETWORK/messages/204831346",
+            "id":204831346,
+            "created_at":"2012/08/22 20:07:09 +0000",
+            "type":"message"
+          }
+        ],
+        "messages":[
+          {
+            "system_message":false,
+            "sender_id":5731065,
+            "chat_client_sequence":null,
+            "client_url":"https://www.yammer.com/",
+            "thread_id":204831346,
+            "url":"https://www.yammer.com/api/v1/messages/205085977",
+            "body":{
+              "parsed":"When you are with Hootsuite (free account) you can add all your social media accounts and have only the feeds come through to you and avoid all the marketing garb that come with the original sites. Also you can post to multiple sites by selecting the accounts you want  to share with. If you have a smart phone
+(Android/iPhone/blackberry) there are Hootsuite apps which will automatically bring through your SM accounts. Just doesn't have the Google+ integration at this point at least for the standard accounts.\n\nThere are many other benefits with the Pro account, but is good to get use to the basic for free and explore later.",
+              "rich":"When you are with Hootsuite (free account) you can add all your social media accounts and have only the feeds come through to you and avoid all the marketing garb that come with the original sites. Also you can post to multiple sites by selecting the accounts you want  to share with. If you have a smart phone (Android/iPhone/blackberry) there
+are Hootsuite apps which will automatically bring through your SM accounts. Just doesn't have the Google+ integration at this point at
+least for the standard accounts.<br><br>There are many other benefits with the Pro account, but is good to get use to the basic for free and explore later.",
+              "plain":"When you are with Hootsuite (free account) you can add all your social media accounts and have only the
+feeds come through to you and avoid all the marketing garb that come with the original sites. Also you can post to multiple sites by selecting the accounts you want to share with. If you have a smart phone (Android/iPhone/blackberry) there are Hootsuite apps which will
+automatically bring through your SM accounts. Just doesn't have the Google+ integration at this point at least for the standard accounts.\n\nThere are many other benefits with the Pro account, but is good to get use to the basic for free and explore later."
+            },
+            "privacy":"public",
+            "network_id":538,
+            "replied_to_id":204831346,
+            "liked_by":{
+              "names":[
+
+              ],
+              "count":0
+            },
+            "client_type":"Web",
+            "attachments":[
+
+            ],
+            "sender_type":"user",
+            "message_type":"update",
+            "web_url":"https://www.yammer.com/NETWORK/messages/205085977",
+            "id":205085977,
+            "direct_message":false,
+            "created_at":"2012/08/23 12:49:55 +0000"
+          }
+        ],
+        "meta":{
+          "ymodules":[
+
+          ],
+          "show_billing_banner":false,
+          "requested_poll_interval":180,
+          "followed_references":[
+
+          ],
+          "current_user_id":2259588
+        }
+      },
+      "type":"message"
+    },
+    "channel":"/feeds/MTo1Mzg6NTM4/primary"
+  },
+  {
+    "id":"12",
+    "successful":true,
+    "channel":"/meta/connect"
+  }
+]
