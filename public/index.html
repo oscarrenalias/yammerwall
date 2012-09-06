@@ -10,44 +10,7 @@
     <!-- javascript code -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript">
-      var socket = io.connect('http://' + location.hostname);
-      socket.on('yam', function(data) {
-        //var content = document.getElementById('content');
-        //content.innerHTML += yam;
-        var yams = data.messages;
-        var users = data.users;
-        var newYams = "";
-        for(i=0; i < yams.length; i++) {
-          var yam = yams[i];
-          newYams += ui.formatYam(yam, users.filter(function(user) {
-            return(user.id == yam.sender_id);
-          })); 
-        }
-        var current = $('#yams').html();
-        $('#yams').html(newYams + current);
-        // hide the spinner in case it's still visible
-        $('.waiting').hide();
-      });  
-
-      var ui = {
-        formatYam: function(yam, users) {
-          var user = "";
-          
-          // to prevent a situation where the user was not found
-          if(users.length==0)
-            user = { "mugshot_url": "no-link" }
-          else
-            user = users[0];
-
-          var yamHtml = '<div class="yam yam-container">'; 
-          yamHtml += '<div class="yam-mugshot"><img src="' + user.mugshot_url + '" alt="mugshot" /></div>';
-          yamHtml += '<div class="yam-body">' + yam.body.rich + "</div>";
-          yamHtml += "</div>\n";
-          return(yamHtml);
-        }
-      }
-   </script>
+    <script type="text/javascript" src="public/js/client.js"></script>
 
     <link href="css/main.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -63,9 +26,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
-
   <body>
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">

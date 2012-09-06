@@ -1,3 +1,9 @@
+#yams {
+	position: absolute;
+	top: 45px;
+	left: 10px;
+}
+
 .yam {
 	margin: 10px;
 	width: 700px;
