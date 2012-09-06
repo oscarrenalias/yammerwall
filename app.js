@@ -26,13 +26,7 @@ app.configure(function() {
     app.use(express.static(__dirname + '/public'));
 });
 
-// Passport session setup.
-//   To support persistent login sessions, Passport needs to be able to
-//   serialize users into and deserialize users out of the session.  Typically,
-//   this will be as simple as storing the user ID when serializing, and finding
-//   the user by ID when deserializing.  However, since this example does not
-//   have a database of user records, the complete Yammer profile is
-//   serialized and deserialized.
+// Passport session setup and serialization
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -51,12 +45,8 @@ passport.use(new YammerStrategy({
     callbackURL: config.host + port  + "/auth/yammer/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
+    // TODO: is this really necessary?
     process.nextTick(function () {      
-      // To keep the example simple, the user's Yammer profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Yammer account with a user record in your database,
-      // and return that user instead.
       return done(null, profile);
     });
   }
@@ -95,11 +85,6 @@ io.sockets.on('connection', function (socket) {
     socket.join('yammer');
 });
 
-// Simple route middleware to ensure user is authenticated.
-//   Use this route middleware on any resource that needs to be protected.  If
-//   the request is authenticated (typically via a persistent login session),
-//   the request will proceed.  Otherwise, the user will be redirected to the
-//   login page.
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login')
@@ -114,7 +99,6 @@ function processUsers(references) {
     
 yammerpush.react(config.oauth_token, function(data) {
     // this callback is trigger every time there's new data from the API
-    console.log("Callback triggered!");
     for(i=0; i<data.length; i++) {
         console.log("Processing response with id = " + data[i].id);
         // process data in the respose depending on its type
