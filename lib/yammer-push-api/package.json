@@ -1,0 +1,4 @@
+{
+	"name": "yammer-push-api",
+	"main": "./api.js"
+}
