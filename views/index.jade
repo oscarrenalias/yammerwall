@@ -1,20 +1,25 @@
 script(src="js/client.js")
-div.navbar.navbar-inverse.navbar-fixed-top
+
+div.navbar.navbar-fixed-top
 	div.navbar-inner
 		div.container
-			a(data-toggle="collapse", data-target=".nav-collapse").btn.btn-navbar
+			button(type="button", data-toggle="collapse", data-target=".nav-collapse").btn.btn-navbar
 				span.icon-bar
 				span.icon-bar
 				span.icon-bar
 			a(href="#").brand YammerPoll
+
+			p.navbar-text.pull-right
+				a(href="#").navbar-link #{user.displayName}
+				img(src="#{user._json.mugshot_url}", alt="").mugshot
+
 			div.nav-collapse.collapse
 				ul.nav
 					li
-						a(href="https://github.com/oscarrenalias/yammer-poll-node") Source code
-					li
-						a(href="/logout") Logout
+						a(href="https://github.com/oscarrenalias/yammer-poll-node") Source
 
-div#yams
-	span.waiting
-		img(src="images/ajax-loader.gif", alt="Spinner")
-		| Waiting for yams...
+div.container
+	div#yams
+		span.waiting
+			img(src="images/ajax-loader.gif", alt="Spinner")
+			| Waiting for yams...
