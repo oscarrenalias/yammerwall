@@ -1,7 +1,6 @@
 #yams {
-	position: absolute;
+	position: relative;
 	top: 45px;
-	left: 10px;
 }
 
 .yam {
@@ -22,6 +21,12 @@
 	display: block;
 	width: 48px;
 	float:left;
+}
+
+.navbar .mugshot {
+	height: 38px;
+	width: 38px;
+	padding: 2px 2px 3px 2px;
 }
 
 .yam-body {
