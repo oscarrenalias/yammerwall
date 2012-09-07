@@ -1,5 +1,4 @@
 body {
-	/*background-color: #565757;*/
 	background-image:url("../images/background.png");
 	background-attachment: fixed;
 	background-size: cover;
@@ -23,14 +22,6 @@ body {
 
 }
 
-/* only needed for the static non-fluid layout, and not for container-fluid */
-.container, 
-.navbar-static-top .container, 
-.navbar-fixed-top .container, 
-.navbar-fixed-bottom .container {
-	width: 50%;
-}
-
 .yam-container ul {
 	list-style-type: none;
 }
@@ -46,9 +37,42 @@ body {
 }
 
 .navbar .mugshot {
-	height: 38px;
-	width: 38px;
+	height: 24px;
+	width: 24px;
 	padding: 2px 2px 3px 2px;
+}
+
+.navbar-inner-custom {
+	padding-left: 15px;
+	padding-right: 15px;
+	background-color: red;
+}
+
+.logo {
+	color: #D1D1D1;
+	font-size: 22px;
+	float: left;
+	padding: 10px 10px 10px 10px;
+}
+
+a.logo:hover {
+	color: white;
+	text-decoration: none;
+}
+
+.navbar-text {
+	color: #D1D1D1;
+}
+
+.navbar-link {
+	color: #D1D1D1;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+a.navbar-link:hover {
+	text-decoration: none;
+	color: white;
 }
 
 .waiting {
