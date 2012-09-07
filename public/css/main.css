@@ -1,6 +1,6 @@
 body {
 	/*background-color: #565757;*/
-	background-image:url("../images/background-linen.png");
+	background-image:url("../images/background.png");
 	background-attachment: fixed;
 	background-size: cover;
 }
@@ -31,8 +31,8 @@ body {
 	width: 50%;
 }
 
-.yam-container {
-
+.yam-container ul {
+	list-style-type: none;
 }
 
 .yam-mugshot {
@@ -73,4 +73,9 @@ body {
 	padding-top: 5px;
 	min-height: 55px;
 	padding-bottom: 10px;
+}
+
+.shadow {
+	-webkit-box-shadow: 4px 4px 40px 0px rgba(50, 50, 50, 0.5);
+	box-shadow: 4px 4px 40px 0px rgba(50, 50, 50, 0.5);
 }

@@ -11,13 +11,14 @@
       var newYams = "";
       for(i=0; i < yams.length; i++) {
         var yam = yams[i];
-        newYams += ui.formatYam(yam, users.filter(function(user) {
+        var newYam = ui.formatYam(yam, users.filter(function(user) {
           return(user.id == yam.sender_id);
         })); 
+
+        $("ul#yams").prepend(newYam);
+        $("ul#yams li:first").hide().slideDown("slow");        
       }
-      var current = $('#yams').html();
-      $('#yams').html(newYams + current);
-      // hide the spinner in case it's still visible
+
       $('.waiting').hide();
     });  
   });
@@ -33,10 +34,10 @@
       else
         user = users[0];
 
-      var yamHtml = '<div class="yam yam-container">'; 
+      var yamHtml = '<li class="yam yam-container shadow">'; 
       yamHtml += '<div class="yam-mugshot"><img src="' + user.mugshot_url + '" alt="mugshot" /></div>';
       yamHtml += '<div class="yam-body">' + yam.body.rich + "</div>";
-      yamHtml += "</div>\n";
+      yamHtml += "</li>\n";
       return(yamHtml);
     }
   }
