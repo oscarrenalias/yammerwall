@@ -1,18 +1,14 @@
 script(src="js/client.js")
 
 div.navbar.navbar-fixed-top
-	div.navbar-inner
-		div.container
-			a(href="#").brand YammerPoll
+	div.navbar-inner-custom
+		a(href="#").logo YammerPoll
 
-			p.navbar-text.pull-right
-				a(href="#").navbar-link #{user.displayName}
-				img(src="#{user._json.mugshot_url}", alt="").mugshot
-
-			div.nav-collapse.collapse
-				ul.nav
-					li
-						a(href="https://github.com/oscarrenalias/yammer-poll-node") Source
+		p.navbar-text.pull-right
+			img(src="#{user._json.mugshot_url}", alt="").mugshot
+			a(href="#").navbar-link #{user.displayName}			
+			||
+			a(href="/logout").navbar-link Logout
 
 div.container-fluid
 	div.row-fluid
@@ -20,7 +16,6 @@ div.container-fluid
 			<!-- nothing -->
 		div.span6
 			ul#yams
-
 		div.span3
 			<!-- nothing -->
 
