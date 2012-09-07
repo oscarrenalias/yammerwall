@@ -1,0 +1,224 @@
+[
+  {
+    "id":"209892353",
+    "data":{
+      "type":"message",
+      "data":{
+        "threaded_extended":{
+
+        },
+        "meta":{
+          "show_billing_banner":false,
+          "current_user_id":2259588,
+          "ymodules":[
+
+          ],
+          "requested_poll_interval":180,
+          "followed_references":[
+
+          ]
+        },
+        "references":[
+          {
+            "type":"tag",
+            "id":990370,
+            "web_url":"https://www.yammer.com/NETWORK/topics/1144677",
+            "url":"https://www.yammer.com/api/v1/tags/990370",
+            "name":"friday-fun"
+          },
+          {
+            "type":"thread",
+            "id":209780129,
+            "web_url":"https://www.yammer.com/NETWORK#/Threads/show?threadId=209780129",
+            "thread_starter_id":209780129,
+            "has_attachments":true,
+            "privacy":"public",
+            "direct_message":false,
+            "url":"https://www.yammer.com/api/v1/messages/in_thread/209780129",
+            "topics":[
+              {
+                "type":"topic",
+                "id":1144677
+              },
+              {
+                "type":"topic",
+                "id":2150386
+              },
+              {
+                "type":"topic",
+                "id":975155
+              }
+            ],
+            "stats":{
+              "updates":1,
+              "first_reply_at":"2012/09/07 08:50:23 +0000",
+              "latest_reply_at":"2012/09/07 08:50:23 +0000",
+              "shares":0,
+              "first_reply_id":209892353,
+              "latest_reply_id":209892353
+            }
+          },
+          {
+            "type":"user",
+            "id":7342617,
+            "mugshot_url_template":"https://mug0.assets-yammer.com/mugshot/images/{width}x{height}/cLJXNXxk1njWnJtW2qS5r0ZMFkrLjfcb",
+            "full_name":"Matt McDowall",
+            "web_url":"https://www.yammer.com/NETWORK/users/matthewwmcdowall",
+            "mugshot_url":"https://mug0.assets-yammer.com/mugshot/images/48x48/cLJXNXxk1njWnJtW2qS5r0ZMFkrLjfcb",
+            "activated_at":"2011/10/03 10:53:19 +0000",
+            "job_title":"Analyst",
+            "url":"https://www.yammer.com/api/v1/users/7342617",
+            "state":"active",
+            "name":"matthewwmcdowall",
+            "stats":{
+              "updates":1383,
+              "following":19,
+              "followers":45
+            }
+          },
+          {
+            "type":"user",
+            "id":2275429,
+            "mugshot_url_template":"https://mug0.assets-yammer.com/mugshot/images/{width}x{height}/pG9f9XFTXhPztwqKChncc9dcwj510x24",
+            "full_name":"Denis Cheong",
+            "web_url":"https://www.yammer.com/NETWORK/users/denischeong",
+            "mugshot_url":"https://mug0.assets-yammer.com/mugshot/images/48x48/pG9f9XFTXhPztwqKChncc9dcwj510x24",
+            "activated_at":"2010/08/23 07:49:21 +0000",
+            "job_title":"Excel Police",
+            "url":"https://www.yammer.com/api/v1/users/2275429",
+            "state":"active",
+            "name":"denischeong",
+            "stats":{
+              "updates":3173,
+              "following":87,
+              "followers":2191
+            }
+          },
+          {
+            "type":"message",
+            "network_id":538,
+            "created_at":"2012/09/07 00:53:32 +0000",
+            "id":209780129,
+            "thread_id":209780129,
+            "body":{
+              "plain":"This morning in the kitchen at my project office I discovered evidence that my #nemesis lurks within my own floor.\n\nWho are you? Where are you hiding? Reveal thou gridded self!"
+            },
+            "sender_id":2275429,
+            "web_url":"https://www.yammer.com/NETWORK/messages/209780129",
+            "replied_to_id":null,
+            "sender_type":"user",
+            "message_type":"update",
+            "url":"https://www.yammer.com/api/v1/messages/209780129",
+            "system_message":false
+          },
+          {
+            "type":"topic",
+            "id":975155,
+            "web_url":"https://www.yammer.com/NETWORK/topics/975155",
+            "normalized_name":"excel police",
+            "url":"https://www.yammer.com/api/v1/topics/975155",
+            "name":"Excel Police",
+            "permalink":"excel police"
+          },
+          {
+            "type":"topic",
+            "id":1144677,
+            "web_url":"https://www.yammer.com/NETWORK/topics/1144677",
+            "normalized_name":"friday fun",
+            "url":"https://www.yammer.com/api/v1/topics/1144677",
+            "name":"Friday Fun",
+            "permalink":"friday fun"
+          },
+          {
+            "type":"topic",
+            "id":2150386,
+            "web_url":"https://www.yammer.com/NETWORK/topics/2150386",
+            "normalized_name":"nemesis",
+            "url":"https://www.yammer.com/api/v1/topics/2150386",
+            "name":"Nemesis",
+            "permalink":"nemesis"
+          }
+        ],
+        "messages":[
+          {
+            "network_id":538,
+            "created_at":"2012/09/07 08:50:23 +0000",
+            "attachments":[
+              {
+                "download_url":"https://www.yammer.com/NETWORK/api/v1/uploaded_files/5787919/version/4362639/download/photo-1.jpg",
+                "type":"image",
+                "path":"538/5787919/photo-1.jpg",
+                "owner_id":7342617,
+                "content_type":"image/jpeg; charset=binary",
+                "real_type":"uploaded_file",
+                "content_class":"Image",
+                "created_at":"2012/07/06 09:52:23 +0000",
+                "id":5787919,
+                "full_name":"photo-1",
+                "last_uploaded_at":"2012/07/06 09:52:23 +0000",
+                "transcoded":null,
+                "size":197478,
+                "last_uploaded_by_type":"user",
+                "streaming_url":null,
+                "original_name":"photo-1.jpg",
+                "group_id":null,
+                "web_url":"https://www.yammer.com/NETWORK/uploaded_files/5787919",
+                "y_id":5787919,
+                "large_icon_url":"https://c64.assets-yammer.com/images/file_icons/types/picture_orange_79x102_icon.png",
+                "overlay_url":"https://www.yammer.com/NETWORK/api/v1/uploaded_files/5787919/version/4362639/preview/photo-1.jpg",
+                "description":"",
+                "owner_type":"user",
+                "uuid":null,
+                "preview_url":"https://www.yammer.com/NETWORK/api/v1/uploaded_files/5787919/version/4362639/preview/photo-1.jpg",
+                "image":{
+                  "size":197478,
+                  "thumbnail_url":"https://www.yammer.com/NETWORK/api/v1/uploaded_files/5787919/version/4362639/thumbnail",
+                  "url":"https://www.yammer.com/NETWORK/api/v1/uploaded_files/5787919/preview/photo-1.jpg"
+                },
+                "privacy":"public",
+                "thumbnail_url":"https://www.yammer.com/NETWORK/api/v1/uploaded_files/5787919/version/4362639/thumbnail",
+                "small_icon_url":"https://c64.assets-yammer.com/images/file_icons/types/picture_orange_39x50_icon.png",
+                "url":"https://www.yammer.com/NETWORK/api/v1/uploaded_files/5787919",
+                "official":false,
+                "name":"photo-1.jpg",
+                "last_uploaded_by_id":7342617
+              }
+            ],
+            "id":209892353,
+            "thread_id":209780129,
+            "client_url":"https://www.yammer.com/",
+            "body":{
+              "plain":"#friday-fun post interesting cups you've found in the office",
+              "parsed":"[[tag:990370]] post interesting cups you've found in the office",
+              "rich":"<span class='yammer-object' data-yammer-object='tag:990370' data-resource-id='990370' data-resource-model='tag'>#<a href='https://www.yammer.com/NETWORK/topics/1144677'>friday-fun</a></span> post interesting cups you've found in the
+office"
+            },
+            "liked_by":{
+              "count":0,
+              "names":[
+
+              ]
+            },
+            "client_type":"Web",
+            "sender_id":7342617,
+            "web_url":"https://www.yammer.com/NETWORK/messages/209892353",
+            "replied_to_id":209780129,
+            "privacy":"public",
+            "sender_type":"user",
+            "direct_message":false,
+            "message_type":"update",
+            "url":"https://www.yammer.com/api/v1/messages/209892353",
+            "chat_client_sequence":null,
+            "system_message":false
+          }
+        ]
+      }
+    },
+    "channel":"/feeds/MTo1Mzg6NTM4/primary"
+  },
+  {
+    "id":"163",
+    "successful":true,
+    "channel":"/meta/connect"
+  }
+]
