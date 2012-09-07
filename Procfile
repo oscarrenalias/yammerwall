@@ -1,1 +1,1 @@
-web: node yammer-push.js
+web: node app.js
