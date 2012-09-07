@@ -23,6 +23,7 @@ body {
 
 }
 
+/* only needed for the static non-fluid layout, and not for container-fluid */
 .container, 
 .navbar-static-top .container, 
 .navbar-fixed-top .container, 
