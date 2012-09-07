@@ -7,9 +7,9 @@ In addition to exploring the capabilities of the Yammer push API, this applicati
 
 How it works
 ============
-The application opens a single connection to the Yammer Push API using an specified OAuth 2.0 token, instead of opening one new connection per user in order to save resources, and this connection to the API will be used to listen to the "All company" feed.
+The application opens a single connection to the Yammer Push API using an specified OAuth 2.0 token instead of opening one new connection per user in order to save resources, and this connection to the API will be used to listen to the "All company" feed. If any kind of filtering is needed (e.g. filter for a specific topic) it will be implemented within the application.
 
-Every time new data is received from the API, it will be slightly pre-processed (not all data received from the API is meant for users) and will be delivered to connected clients via Socket.io. 
+Every time new data is received from the API, it will be pre-processed (not all data received from the API is meant for users) and will be delivered to connected clients via Socket.io. 
 
 Users will be authenticated using the OAuth 2.0 process, so they need to be part of a network to be able to use the application (but please see the TODO section) 
 
@@ -37,11 +37,11 @@ Running in Heroku
 =================
 The "heroku" branch of this repository is ready to be deployed to Heroku. 
 
-In this branch, configuration data is no longer configured via config.js but via the following Heroku environment varialbes:
+In this branch, configuration data is no longer configured via config.js but via the following Heroku environment variables:
 
-OAUTH_TOKEN: your OAuth 2.0 token
-YAMMER_APPLICATION_KEY: your Yammer application key
-YAMMER_APPLICATION_SECRET: your Yammer application secret
+* OAUTH_TOKEN: your OAuth 2.0 token
+* YAMMER_APPLICATION_KEY: your Yammer application key
+* YAMMER_APPLICATION_SECRET: your Yammer application secret
 
 Use ```heroku config:add``` to set suitable values for your configuration.
 
