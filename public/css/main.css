@@ -1,3 +1,7 @@
+body {
+	background-color: #565757;
+}
+
 #yams {
 	position: relative;
 	top: 45px;
@@ -5,7 +9,16 @@
 
 .yam {
 	margin: 10px;
-	width: 700px;
+	width: 600px;	
+	padding-right: 10px	;
+	background-color: white;
+	font-size: 120%;
+	/* rounded corners, yay */
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;	
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+
 }
 
 .yam-container {
@@ -14,13 +27,16 @@
 
 .yam-mugshot {
 	position: relative;
-	top: 0;
+	/*top: 0;
 	left: 0;
 	width: 48px;
-	height: 48px;
+	height: 48px;*/
 	display: block;
 	width: 48px;
 	float:left;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 .navbar .mugshot {
@@ -32,7 +48,8 @@
 .yam-body {
 	word-wrap: break-word;
 	top: 0px;
-	padding-left: 50px;
-	margin: 0px;
+	padding-left: 70px;
+	padding-top: 5px;
 	min-height: 55px;
+	padding-bottom: 10px;
 }
