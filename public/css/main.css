@@ -23,7 +23,10 @@ body {
 
 }
 
-.container {
+.container, 
+.navbar-static-top .container, 
+.navbar-fixed-top .container, 
+.navbar-fixed-bottom .container {
 	width: 50%;
 }
 
@@ -48,15 +51,18 @@ body {
 }
 
 .waiting {
+	width:auto;
+	height:auto;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:-75px 0 0 -135px;
 	background-color: white;
 	padding: 10px 30px 10px 30px;
 	-webkit-border-radius: 10px;
 	-khtml-border-radius: 10px;	
 	-moz-border-radius: 10px;
 	border-radius: 10px;
-	position: absolute;
-	width: 100%;
-	margin-top: 50px;
 }
 
 .yam-body {
