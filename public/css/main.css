@@ -1,5 +1,8 @@
 body {
-	background-color: #565757;
+	/*background-color: #565757;*/
+	background-image:url("../images/background-linen.png");
+	background-attachment: fixed;
+	background-size: cover;
 }
 
 #yams {
@@ -9,7 +12,6 @@ body {
 
 .yam {
 	margin: 10px;
-	width: 600px;	
 	padding-right: 10px	;
 	background-color: white;
 	font-size: 120%;
@@ -21,16 +23,16 @@ body {
 
 }
 
+.container {
+	width: 50%;
+}
+
 .yam-container {
 
 }
 
 .yam-mugshot {
 	position: relative;
-	/*top: 0;
-	left: 0;
-	width: 48px;
-	height: 48px;*/
 	display: block;
 	width: 48px;
 	float:left;
@@ -43,6 +45,18 @@ body {
 	height: 38px;
 	width: 38px;
 	padding: 2px 2px 3px 2px;
+}
+
+.waiting {
+	background-color: white;
+	padding: 10px 30px 10px 30px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;	
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	position: absolute;
+	width: 100%;
+	margin-top: 50px;
 }
 
 .yam-body {
