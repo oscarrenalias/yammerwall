@@ -1,5 +1,5 @@
-exports.oauth_token = "token";
+exports.oauth_token = process.env.OAUTH_TOKEN
 exports.credentials = {
-	"YAMMER_CONSUMER_KEY": "key",
-	"YAMMER_CONSUMER_SECRET": "secret"
+	"YAMMER_CONSUMER_KEY": process.env.YAMMER_CONSUMER_KEY,
+	"YAMMER_CONSUMER_SECRET": process.env.YAMMER_CONSUMER_SECRET
 }
