@@ -79,6 +79,37 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
+// This sets up a route that allows us to send random yams for development
+if(config.mode == "dev") {
+  console.log("DEV mode activated, setting up route in /dev/sendyam");
+  app.get("/dev/sendyam", function(req, res) {
+    // dummy user
+    var user = { 
+      id: "dummy", 
+      mugshot_url: "https://mug0.assets-yammer.com/mugshot/images/48x48/pqxxGf4c4tr51dFRJlHksFrBVL9gGtc5",
+      name: "test-user",
+      full_name: "Test User"
+    };
+    // and dummy message
+    var testBody = "This is a test yam"
+    var message = { 
+      sender_id: user.id, 
+      body: { 
+        rich: testBody,
+        parsed: testBody,
+        plain: testBody        
+      },
+      created_at:"2012/08/23 12:49:55 +0000",
+      id: "random-id"
+    };
+
+    // send our dummy user and message
+    io.sockets.in("yammer").emit( "yam", {messages: [ message ], users: [ user ] })
+
+    res.send('Done. <a href="/dev/sendyam">Send another one</a>');
+  })
+}
+
 // handling of socket.io connections
 io.sockets.on('connection', function (socket) {
     console.log("New client added");
