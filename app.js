@@ -99,7 +99,7 @@ if(config.mode == "dev") {
         parsed: testBody,
         plain: testBody        
       },
-      created_at:"2012/08/23 12:49:55 +0000",
+      created_at:(new Date()).toISOString(),
       id: "random-id"
     };
 
