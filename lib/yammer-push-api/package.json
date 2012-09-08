@@ -1,4 +1,7 @@
 {
 	"name": "yammer-push-api",
-	"main": "./api.js"
+	"main": "./api.js",
+	"dependencies": {
+		"winston": ">= 0.6.0"
+	}
 }
