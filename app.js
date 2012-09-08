@@ -128,7 +128,7 @@ function processUsers(references) {
     }));
 }
     
-yammerpush.react(config.oauth_token, function(data) {
+yammerpush.react(config.oauth_token, { type: "all" }, function(data) {
     // this callback is trigger every time there's new data from the API
     for(i=0; i<data.length; i++) {
         console.log("Processing response with id = " + data[i].id);
