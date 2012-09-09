@@ -7,6 +7,7 @@ var express = require('express'),
     util = require('util'),
     YammerStrategy = require('passport-yammer').Strategy;
     yammerpush = require('./lib/yammer-push-api');
+    devSupport = require('./lib/devsupport.js');
 
 // configure Express
 app.configure(function() {
@@ -82,32 +83,7 @@ app.get('/logout', function(req, res){
 // This sets up a route that allows us to send random yams for development
 if(config.mode == "dev") {
   console.log("DEV mode activated, setting up route in /dev/sendyam");
-  app.get("/dev/sendyam", function(req, res) {
-    // dummy user
-    var user = { 
-      id: "dummy", 
-      mugshot_url: "https://mug0.assets-yammer.com/mugshot/images/48x48/pqxxGf4c4tr51dFRJlHksFrBVL9gGtc5",
-      name: "test-user",
-      full_name: "Test User"
-    };
-    // and dummy message
-    var testBody = "This is a test yam"
-    var message = { 
-      sender_id: user.id, 
-      body: { 
-        rich: testBody,
-        parsed: testBody,
-        plain: testBody        
-      },
-      created_at:"2012/08/23 12:49:55 +0000",
-      id: "random-id"
-    };
-
-    // send our dummy user and message
-    io.sockets.in("yammer").emit( "yam", {messages: [ message ], users: [ user ] })
-
-    res.send('Done. <a href="/dev/sendyam">Send another one</a>');
-  })
+  devSupport.configureDevRoutes(app, io);
 }
 
 // handling of socket.io connections
@@ -122,13 +98,27 @@ function ensureAuthenticated(req, res, next) {
 }  
 
 // extracts the list of users from the references section
-function processUsers(references) {
-    return(references.filter(function(item) {
+function processReferences(references) {
+    return({
+      users: references.filter(function(item) {
         return(item.type == "user");
-    }));
+      }),
+      threads: references.filter(function(item) {
+        return(item.type == "thread");
+      }),
+      messages: references.filter(function(item) {
+        return(item.type == "message");
+      }),
+      tags: references.filter(function(item) {
+        return(item.type == "tag");
+      }),
+      topics: references.filter(function(item) {
+        return(item.type == "tag");
+      })
+    });    
 }
     
-yammerpush.react(config.oauth_token, function(data) {
+yammerpush.react(config.oauth_token, { type: "all" }, function(data) {
     // this callback is trigger every time there's new data from the API
     for(i=0; i<data.length; i++) {
         console.log("Processing response with id = " + data[i].id);
@@ -136,11 +126,14 @@ yammerpush.react(config.oauth_token, function(data) {
         if(data[i].data) {
             // not all messages have data to process
             if(data[i].data.type == "message") {
+                references = processReferences(data[i].data.data.references);
                 io.sockets.in("yammer").emit(
-                    "yam", { 
-                        "messages": data[i].data.data.messages, 
-                        "users": processUsers(data[i].data.data.references) 
-                });
+                    "yam", 
+                    { 
+                      messages: data[i].data.data.messages, 
+                      references: references
+                    }
+                );
             }
             else {
                 console.log("There was no message data to process");

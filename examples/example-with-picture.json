@@ -190,8 +190,7 @@
             "body":{
               "plain":"#friday-fun post interesting cups you've found in the office",
               "parsed":"[[tag:990370]] post interesting cups you've found in the office",
-              "rich":"<span class='yammer-object' data-yammer-object='tag:990370' data-resource-id='990370' data-resource-model='tag'>#<a href='https://www.yammer.com/NETWORK/topics/1144677'>friday-fun</a></span> post interesting cups you've found in the
-office"
+              "rich":"<span class='yammer-object' data-yammer-object='tag:990370' data-resource-id='990370' data-resource-model='tag'>#<a href='https://www.yammer.com/NETWORK/topics/1144677'>friday-fun</a></span> post interesting cups you've found in the office"
             },
             "liked_by":{
               "count":0,

@@ -103,3 +103,26 @@ a.navbar-link:hover {
 	-webkit-box-shadow: 4px 4px 40px 0px rgba(50, 50, 50, 0.5);
 	box-shadow: 4px 4px 40px 0px rgba(50, 50, 50, 0.5);
 }
+
+.yam-info {
+	padding-left: 10px;
+	font-size: 80%;
+}
+
+.yam-info .timeago {
+	text-decoration: none;
+	border: none;
+}
+
+.yam-info .yam-user {
+	font-weight: bold;
+}
+
+.yam-attachments {
+	padding-left: 10px;
+	padding-bottom: 5px;	
+}
+
+.yam-attachment-info {
+	font-size: 80%;
+}
