@@ -120,5 +120,9 @@ a.navbar-link:hover {
 
 .yam-attachments {
 	padding-left: 10px;
-	padding-bottom: 5px;
+	padding-bottom: 5px;	
+}
+
+.yam-attachment-info {
+	font-size: 80%;
 }
