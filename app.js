@@ -43,7 +43,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new YammerStrategy({
     clientID: config.credentials.YAMMER_CONSUMER_KEY,
     clientSecret: config.credentials.YAMMER_CONSUMER_SECRET,
-    callbackURL: config.host + port  + "/auth/yammer/callback"
+    callbackURL: "/auth/yammer/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     // TODO: is this really necessary?
@@ -113,7 +113,7 @@ function processReferences(references) {
         return(item.type == "tag");
       }),
       topics: references.filter(function(item) {
-        return(item.type == "tag");
+        return(item.type == "topic");
       })
     });    
 }
