@@ -48,22 +48,55 @@
         {{#yam.attachments}} \
         <div class="yam-attachments"> \
           {{#image}} \
-            <div class="attachment attachment-image"> \
+            <div class="yam-attachment yam-attachment-image"> \
               <a href="{{image.url}}" alt="{{image.original_name}}" title="{{full_name}}"> \
                 <img src="{{image.thumbnail_url}}" alt="Thumbnail" /> \
               </a> \
             </div> \
           {{/image}} \
-          <div class="attachment-info"> \
-            {{full_name}} \
+          {{^image}} \
+            <div class="yam-attachment"> \
+              <a href={{url}} alt="Attachment"> \
+                {{...}} \
+              </a> \
+            </div> \
+          {{/image}} \
+          <div class="yam-attachment-info"> \
+            {{full_name}}, {{#asSize}}{{size}}{{/asSize}}\
           </div> \
         </div> \
         {{/yam.attachments}} \
         <div class="yam-info"> \
           Posted by <span class="yam-user">{{user.full_name}}</span>, \
-          <abbr class="timeago" title="{{yam.created_at}}">{{created_at_formatted}}</abbr> \
+          <abbr class="timeago" title="{{yam.created_at}}">{{#asDate}}{{yam.created_at}}{{/asDate}}</abbr> \
         <div> \
       </li>',
+
+    formatNumber: function( number, decimals, dec_point, thousands_sep ) {
+      var n = number, c = isNaN(decimals = Math.abs(decimals)) ? 2 : decimals;
+      var d = dec_point == undefined ? "," : dec_point;
+      var t = thousands_sep == undefined ? "." : thousands_sep, s = n < 0 ? "-" : "";
+      var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
+      
+      return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+    }, 
+
+    formatSize: function(filesize) {
+      if (filesize >= 1073741824) {
+           filesize = ui.formatNumber(filesize / 1073741824, 2, '.', '') + ' Gb';
+      } else { 
+        if (filesize >= 1048576) {
+            filesize = ui.formatNumber(filesize / 1048576, 2, '.', '') + ' Mb';
+        } else { 
+          if (filesize >= 1024) {
+            filesize = ui.formatNumber(filesize / 1024, 0) + ' Kb';
+          } else {
+            filesize = ui.formatNumber(filesize, 0) + ' bytes';
+          };
+        };
+      };
+      return filesize;      
+    },
 
     formatYam: function(yam, users) {
       var user = "";
@@ -77,7 +110,16 @@
       var yamHtml = jQuery.mustache(ui.yamTemplate, { 
         yam: yam, 
         user: user, 
-        created_at_formatted: jQuery.timeago(yam.created_at) 
+        asSize: function() {
+          return function(text, render) {
+            return(ui.formatSize(render(text)));
+          }
+        },
+        asDate: function() {
+          return function(text, render) {
+            return(jQuery.timeago(render(text)));
+          }
+        }
       });
       return(yamHtml);
     }
