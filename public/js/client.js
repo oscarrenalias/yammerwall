@@ -8,7 +8,6 @@
     socket.on('yam', function(data) {
       var yams = data.messages;
       var users = data.users;
-      var newYams = "";
       for(i=0; i < yams.length; i++) {
         var yam = yams[i];
         var newYam = ui.formatYam(yam, users.filter(function(user) {
@@ -20,6 +19,15 @@
         $("ul#yams li:first").hide().slideDown("slow");        
         // attach the timestamp auto-update to the one that was inserted (the ones below already have it)
         $("ul#yams li:first abbr.timeago").timeago();
+        // for images, attach fancybox
+        $("ul#yams li:first .attachment-image a").fancybox({
+          overlayShow: true,
+          overlayOpacity: 0.85,
+          overlayColor: "#222",
+          titleShow: true,
+          transitionIn: "none",
+          transitionOut: "none"
+        });
       }
 
       $('.waiting').hide();
@@ -35,8 +43,22 @@
           <img src="{{user.mugshot_url}}" alt="mugshot" /> \
         </div> \
         <div class="yam-body"> \
-          {{yam.body.rich}} \
+          {{{yam.body.rich}}} \
         </div> \
+        {{#yam.attachments}} \
+        <div class="yam-attachments"> \
+          {{#image}} \
+            <div class="attachment attachment-image"> \
+              <a href="{{image.url}}" alt="{{image.original_name}}" title="{{full_name}}"> \
+                <img src="{{image.thumbnail_url}}" alt="Thumbnail" /> \
+              </a> \
+            </div> \
+          {{/image}} \
+          <div class="attachment-info"> \
+            {{full_name}} \
+          </div> \
+        </div> \
+        {{/yam.attachments}} \
         <div class="yam-info"> \
           Posted by <span class="yam-user">{{user.full_name}}</span>, \
           <abbr class="timeago" title="{{yam.created_at}}">{{created_at_formatted}}</abbr> \
