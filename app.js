@@ -98,10 +98,24 @@ function ensureAuthenticated(req, res, next) {
 }  
 
 // extracts the list of users from the references section
-function processUsers(references) {
-    return(references.filter(function(item) {
+function processReferences(references) {
+    return({
+      users: references.filter(function(item) {
         return(item.type == "user");
-    }));
+      }),
+      threads: references.filter(function(item) {
+        return(item.type == "thread");
+      }),
+      messages: references.filter(function(item) {
+        return(item.type == "message");
+      }),
+      tags: references.filter(function(item) {
+        return(item.type == "tag");
+      }),
+      topics: references.filter(function(item) {
+        return(item.type == "tag");
+      })
+    });    
 }
     
 yammerpush.react(config.oauth_token, { type: "all" }, function(data) {
@@ -112,11 +126,14 @@ yammerpush.react(config.oauth_token, { type: "all" }, function(data) {
         if(data[i].data) {
             // not all messages have data to process
             if(data[i].data.type == "message") {
+                references = processReferences(data[i].data.data.references);
                 io.sockets.in("yammer").emit(
-                    "yam", { 
-                        "messages": data[i].data.data.messages, 
-                        "users": processUsers(data[i].data.data.references) 
-                });
+                    "yam", 
+                    { 
+                      messages: data[i].data.data.messages, 
+                      references: references
+                    }
+                );
             }
             else {
                 console.log("There was no message data to process");
