@@ -117,3 +117,8 @@ a.navbar-link:hover {
 .yam-info .yam-user {
 	font-weight: bold;
 }
+
+.yam-attachments {
+	padding-left: 10px;
+	padding-bottom: 5px;
+}
