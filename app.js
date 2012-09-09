@@ -113,7 +113,7 @@ function processReferences(references) {
         return(item.type == "tag");
       }),
       topics: references.filter(function(item) {
-        return(item.type == "tag");
+        return(item.type == "topic");
       })
     });    
 }
