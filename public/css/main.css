@@ -13,7 +13,7 @@ body {
 	margin: 10px;
 	padding-right: 10px	;
 	background-color: white;
-	font-size: 120%;
+	font-size: 11pt;
 	/* rounded corners, yay */
 	-webkit-border-radius: 10px;
 	-khtml-border-radius: 10px;	
@@ -125,4 +125,22 @@ a.navbar-link:hover {
 
 .yam-attachment-info {
 	font-size: 80%;
+}
+
+.tipsy { 
+  font-size: 90%; 
+  position: absolute; 
+  padding: 5px; 
+  z-index: 100000;
+  color: white; 
+}
+
+/* Rounded corners */
+.tipsy-inner {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  box-shadow: 4 4 4px #000000;
+  -webkit-box-shadow: 0 0 4px #000000;
+  -moz-box-shadow: 0 0 5px #000000;
 }
