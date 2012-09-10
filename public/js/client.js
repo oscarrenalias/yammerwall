@@ -2,9 +2,14 @@
   $(document).ready(function() {
     console.log("Application initialized");
 
-    var socket = io.connect('http://' + location.hostname);  
+    $('a.live-tipsy').tipsy({
+      live: true,
+      fade: true,
+      gravity: $.fn.tipsy.autoNS
+    });
 
     // callback for new socket.io data  
+    var socket = io.connect('http://' + location.hostname);  
     socket.on('yam', function(data) {
       var yams = data.messages;
       var users = data.references.users;
@@ -68,7 +73,9 @@
         <div class="yam-info"> \
           Posted by <span class="yam-user">{{user.full_name}}</span>, \
           <abbr class="timeago" title="{{yam.created_at}}">{{#asDate}}{{yam.created_at}}{{/asDate}}</abbr> \
-          {{inReplyTo}} \
+          {{#inReplyTo}} \
+            <a href="#" class="live-tipsy" title="{{reply_to_message.body.plain}}">in reply to</a> {{reply_to_user.full_name}} \
+          {{/inReplyTo}} \
         <div> \
       </li>',
 
@@ -128,15 +135,21 @@
         },
         inReplyTo: function() {
           // too many hoops needed to get to the name of the user to whom we're replying...
-          var threads = ui.findReference(references.messages, "message", yam.replied_to_id);
-          if(threads.length == 1) {
-            var creators = ui.findReference(references.users, "user", threads[0].sender_id);
-            if(creators.length == 1) 
-              return("in reply to " + creators[0].full_name);
-            else
-              return("");
+          return function(text, render) {
+            var threads = ui.findReference(references.messages, "message", yam.replied_to_id);
+            var content = "";
+            if(threads.length == 1) {
+              var replyToMessage = threads[0];
+              var creators = ui.findReference(references.users, "user", replyToMessage.sender_id);
+              if(creators.length == 1) {
+                //return("<a href='#' class='live-tipsy' title='" + replyToMessage.body.plain + "'>in reply to</a> " + creators[0].full_name);
+                return(jQuery.mustache(text, { reply_to_message: replyToMessage, reply_to_user: creators[0]}));
+              }                
+              else
+                return("");
+            }
+            return("");
           }
-          return("");
         }
       });
       return(yamHtml);
