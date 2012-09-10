@@ -143,4 +143,8 @@ a.navbar-link:hover {
   box-shadow: 4 4 4px #000000;
   -webkit-box-shadow: 0 0 4px #000000;
   -moz-box-shadow: 0 0 5px #000000;
+
+  /* make it a little wider */
+  max-width: 400px;
+  text-align: left;
 }
