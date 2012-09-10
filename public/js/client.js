@@ -60,7 +60,7 @@
           {{^image}} \
             <div class="yam-attachment"> \
               <a href={{download_url}} alt="Attachment"> \
-                <img src="{{small_icon_url}}" alt="Icon" /> \
+                {{#small_icon_url}}<img src="{{small_icon_url}}" alt="Icon" />{{/small_icon_url}} \
                 {{full_name}} \
               </a> \
             </div> \
@@ -142,7 +142,6 @@
               var replyToMessage = threads[0];
               var creators = ui.findReference(references.users, "user", replyToMessage.sender_id);
               if(creators.length == 1) {
-                //return("<a href='#' class='live-tipsy' title='" + replyToMessage.body.plain + "'>in reply to</a> " + creators[0].full_name);
                 return(jQuery.mustache(text, { reply_to_message: replyToMessage, reply_to_user: creators[0]}));
               }                
               else
