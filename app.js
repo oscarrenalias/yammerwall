@@ -6,7 +6,7 @@ var express = require('express'),
     config = require('./config.js'),
     util = require('util'),
     YammerStrategy = require('passport-yammer').Strategy;
-    yammerpush = require('./lib/yammer-push-api');
+    YammerPushAPI = require('./lib/yammer-push-api');
     devSupport = require('./lib/devsupport.js');
 
 // configure Express
@@ -117,21 +117,26 @@ function processReferences(references) {
       })
     });    
 }
-    
-yammerpush.react(config.oauth_token, { type: "all" }, function(data) {
+
+var pushAPIClient = new YammerPushAPI(config.oauth_token, { type: "all" });
+pushAPIClient.on("data", function(data) {
     // this callback is trigger every time there's new data from the API
-    for(i=0; i<data.length; i++) {
-        console.log("Processing response with id = " + data[i].id);
+    //for(i=0; i<data.length; i++) {
+    data.map(function(yam) {
+        console.log("Processing response with id = " + /*data[i].id*/ yam.id);
         // process data in the respose depending on its type
-        if(data[i].data) {
+        //if(data[i].data) {
+        if(yam.data) {
             // not all messages have data to process
-            if(data[i].data.type == "message") {
-                references = processReferences(data[i].data.data.references);
+            //if(data[i].data.type == "message") {
+            if(yam.data.type == "message") {
+                //references = processReferences(data[i].data.data.references);
                 io.sockets.in("yammer").emit(
                     "yam", 
                     { 
-                      messages: data[i].data.data.messages, 
-                      references: references
+                      //messages: data[i].data.data.messages, 
+                      messages: yam.data.data.messages,
+                      references: processReferences(yam.data.data.references)
                     }
                 );
             }
@@ -139,9 +144,10 @@ yammerpush.react(config.oauth_token, { type: "all" }, function(data) {
                 console.log("There was no message data to process");
             }                                                
         }
-    }
+    });
 });
-
+pushAPIClient.start();
+    
 // start the application **
 app.listen(port);
 console.log("Server started in port: " + port);
