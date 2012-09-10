@@ -90,6 +90,14 @@ a.navbar-link:hover {
 	border-radius: 10px;
 }
 
+.waiting a {
+	color: #000;
+}
+
+.waiting a:hover {
+	text-decoration: underline;
+}
+
 .yam-body {
 	word-wrap: break-word;
 	top: 0px;
