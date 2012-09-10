@@ -3,7 +3,7 @@ yammer-poll-node
 
 Small NodeJs application that uses the Yammer push API to retrieve the contents of the "All company" feed. The API uses the cometd/Bayeux protocol to deliver data, and its specifications can be read here: https://developer.yammer.com/api/realtime.html.
 
-In addition to exploring the capabilities of the Yammer push API, this application can be used as part of Yammer dashboards or in an overhead screen in events.
+In addition to exploring the capabilities of the Yammer push API, this application can be used as part of Yammer dashboards or in an overhead screen in events but keep in mind that while the push API is usually quite close to real time, extended testing has revealed that in certain occasions the delay between the push API and the yammer.com site can be between 10 to 20 minutes.
 
 How it works
 ============
@@ -53,8 +53,10 @@ Current list of items to be implemented, in no particular order:
 
 * Currenty only the "All company" feed can be viewed, but it would be interesting to have the application display the feed for a specific hasthtag or group, for e.g. dashboards or during events identified by a hashtag. Will be implemented shortly.
 
-* The current user interface and layout is not very pretty
+* DONE: The current user interface and layout is not very pretty
 
 * The code in the yammer-push-api module is not very clean or pretty, and should be refactored
 
-* Implement support for attachments (primarily images)
+* WIP: Implement support for attachments (primarily images). Images and files already working; links and polls are also sent by Yammer as attachments and are currently not supported
+
+* The current layout is not very flexible for mobile devices, probably a stylesheet specific for mobiles should be created
