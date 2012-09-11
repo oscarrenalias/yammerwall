@@ -1,7 +1,5 @@
 body {
-	background-image:url("../images/background.png");
-	background-attachment: fixed;
-	background-size: cover;
+	background-color: #2a2e38;
 }
 
 #yams {
@@ -108,8 +106,8 @@ a.navbar-link:hover {
 }
 
 .shadow {
-	-webkit-box-shadow: 4px 4px 40px 0px rgba(50, 50, 50, 0.5);
-	box-shadow: 4px 4px 40px 0px rgba(50, 50, 50, 0.5);
+	-webkit-box-shadow: 4px 4px 4px 0px rgba(1, 1, 1, 0.5);
+	box-shadow: 4px 4px 40px 0px rgba(1, 1, 1, 0.5);
 }
 
 .yam-info {
