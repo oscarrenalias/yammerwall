@@ -51,12 +51,6 @@ Current list of items to be implemented, in no particular order:
 
 * Currently the application is not checking if the static OAuth 2.0 token and the user who just logged in belong to the same network, which means that users could potentially see data from another network even if they do not belong to it. This is a potential security risk and will be addressed shortly, though it should not be a problem for "closed" deployments
 
-* Currenty only the "All company" feed can be viewed, but it would be interesting to have the application display the feed for a specific hasthtag or group, for e.g. dashboards or during events identified by a hashtag. Will be implemented shortly.
-
-* DONE: The current user interface and layout is not very pretty
-
-* The code in the yammer-push-api module is not very clean or pretty, and should be refactored
-
 * WIP: Implement support for attachments (primarily images). Images and files already working; links and polls are also sent by Yammer as attachments and are currently not supported
 
 * The current layout is not very flexible for mobile devices, probably a stylesheet specific for mobiles should be created
