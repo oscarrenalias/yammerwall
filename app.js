@@ -146,6 +146,12 @@ pushAPIClient.on("data", function(data) {
         }
     });
 });
+
+pushAPIClient.on("fatal", function(error) {
+  console.log("There was an error connecting to the real-time API, please check the OAuth configuration. Exiting...");
+  process.exit(-1);
+})
+
 pushAPIClient.start();
     
 // start the application **
