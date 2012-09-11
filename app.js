@@ -6,7 +6,7 @@ var express = require('express'),
     config = require('./config.js'),
     util = require('util'),
     YammerStrategy = require('passport-yammer').Strategy;
-    YammerPushAPI = require('./lib/yammer-push-api');
+    YammerPushAPI = require('yammer-push-api-client');
     devSupport = require('./lib/devsupport.js');
 
 // configure Express

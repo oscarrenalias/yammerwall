@@ -1,4 +1,4 @@
-yammer-poll-node
+yammer-push-node
 ================
 
 Small NodeJs application that uses the Yammer push API to retrieve the contents of the "All company" feed. The API uses the cometd/Bayeux protocol to deliver data, and its specifications can be read here: https://developer.yammer.com/api/realtime.html.
