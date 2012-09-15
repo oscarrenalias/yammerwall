@@ -1,0 +1,7 @@
+{
+	"name": "yammer-api-client",
+	"main": "./api.js",
+	"dependencies": {
+		"winston": ">= 0.6.0"
+	}
+}
