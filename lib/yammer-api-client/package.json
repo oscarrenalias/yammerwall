@@ -2,6 +2,7 @@
 	"name": "yammer-api-client",
 	"main": "./api.js",
 	"dependencies": {
-		"winston": ">= 0.6.0"
+		"winston": ">= 0.6.0",
+		"vows": ">= 0.6.4"
 	}
 }
