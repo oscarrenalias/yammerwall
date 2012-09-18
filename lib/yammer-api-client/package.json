@@ -1,8 +1,10 @@
 {
 	"name": "yammer-api-client",
-	"main": "./api.js",
+	"main": "./lib/api.js",
 	"dependencies": {
-		"winston": ">= 0.6.0",
-		"vows": ">= 0.6.4"
+		"winston": ">= 0.6.0"
+	},
+	"devDependencies": {
+		"vows": ">= 0.6.0"
 	}
 }
