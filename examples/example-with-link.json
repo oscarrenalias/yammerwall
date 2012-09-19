@@ -1,0 +1,109 @@
+{
+  "name":"yam",
+  "args":[
+    {
+      "messages":[
+        {
+          "web_url":"https://www.yammer.com/NETWORK/messages/210625519",
+          "message_type":"update",
+          "replied_to_id":null,
+          "sender_type":"user",
+          "direct_message":false,
+          "created_at":"2012/09/10 10:29:55 +0000",
+          "sender_id":184180927,
+          "body":{
+            "urls":[
+              "http://techcrunch.com/2012/09/08/learn-or-die-a-primer/"
+            ],
+            "rich":"<a href=\"http://techcrunch.com/2012/09/08/learn-or-die-a-primer/\" target=\"_blank\" rel=\"nofollow\">http://techcrunch.com/2012/09/08/learn-or-die-a-primer/</a>",
+            "parsed":"http://techcrunch.com/2012/09/08/learn-or-die-a-primer/",
+            "plain":"http://techcrunch.com/2012/09/08/learn-or-die-a-primer/"
+          },
+          "id":210625519,
+          "url":"https://www.yammer.com/api/v1/messages/210625519",
+          "client_type":"Desktop",
+          "client_url":"https://www.yammer.com/company/desktop/",
+          "attachments":[
+            {
+              "web_url":"http://techcrunch.com/2012/09/08/learn-or-die-a-primer/",
+              "inline_html":"<div class=\"yj-open-graph-object ymodule-instance\" id=\"ymodule-instance-3449019078726669\">\n  <div class=\"ymodule-instance-34490190726669-container-1 yj-open-graph-image\">\n    <div class=\"yj-thumbnail\">\n      <a href=\"http://techcrunch.com/2012/09/08/learn-or-die-a-primer/\" target=\"_blank\" rel=\"nofollow\">\n        <img src=\"https://i.embed.ly/?key=4d90b544096f11e084894040444cdc60&amp;url=http%3A%2F%2Ftctechcrunch2011.files.wordpress.com%2F2012%2F09%2Ffreeman.jpg%3Fw%3D640%26h%3D1015&amp;maxwidth=100&amp;maxheight=100\" alt=\"\" class=\"yj-icon\" />\n      </a>\n    </div>\n    <h5 class=\"yj-title\">\n      <span><ahref=\"http://techcrunch.com/2012/09/08/learn-or-die-a-primer/\" target=\"_blank\" rel=\"nofollow\"\n          >\n        Learn Or Die: A Primerhttp://techcrunch.com/2012/09/08/learn-or-die-a-primer/\n      </a></span>\n    </h5>\n    <h6 class=\"yj-subtitle\">\n      <span>techcrunch.com</span>\n    </h6>\n    <p class=\"yj-description\">\n      <span>Editor's Note: The guest post was written by Craig Malloy , the CEO of Bloomfire , a knowledge sharing tool for the modern workforce. Malloy previously served as Founder/CEO of ViaVideo (acquired by Polycom), and the Founder/CEO of LifeSize (acquired by Logitech). You can follow him on Twitter here.</span>\n    </p>\n  </div>\n</div>\n",
+              "ymodule":{
+                "icon_url":"blank.gif",
+                "app_id":"blank"
+              },
+              "id":3449019078726669,
+              "inline_url":"blank.html",
+              "type":"ymodule",
+              "name":"Learn Or Die: A Primerhttp://techcrunch.com/2012/09/08/learn-or-die-a-primer/"
+            }
+          ],
+          "chat_client_sequence":null,
+          "network_id":538,
+          "liked_by":{
+            "count":0,
+            "names":[
+
+            ]
+          },
+          "system_message":false,
+          "thread_id":210625519,
+          "privacy":"public"
+        }
+      ],
+      "references":{
+        "users":[
+          {
+            "state":"active",
+            "web_url":"https://www.yammer.com/NETWORK/users/shannondavis",
+            "stats":{
+              "updates":19,
+              "following":12,
+              "followers":4
+            },
+            "job_title":"Project Manager",
+            "id":184180927,
+            "mugshot_url":"https://mug0.assets-yammer.com/mugshot/images/48x48/914mllm10vsVzl3QqDS5TkzBpdHh4vg0",
+            "activated_at":"2012/05/11 13:47:12 +0000",
+            "url":"https://www.yammer.com/api/v1/users/184180927",
+            "type":"user",
+            "name":"shannondavis",
+            "mugshot_url_template":"https://mug0.assets-yammer.com/mugshot/images/{width}x{height}/914mllm10vsVzl3QqDS5TkzBpdHh4vg0",
+            "full_name":"Shannon Davis"
+          }
+        ],
+        "threads":[
+          {
+            "web_url":"https://www.yammer.com/NETWORK#/Threads/show?threadId=210625519",
+            "stats":{
+              "updates":1,
+              "latest_reply_at":"2012/09/10 10:29:55 +0000",
+              "latest_reply_id":210625519,
+              "shares":0,
+              "first_reply_at":null,
+              "first_reply_id":null
+            },
+            "direct_message":false,
+            "id":210625519,
+            "has_attachments":false,
+            "thread_starter_id":210625519,
+            "topics":[
+
+            ],
+            "url":"https://www.yammer.com/api/v1/messages/in_thread/210625519",
+            "type":"thread",
+            "privacy":"public"
+          }
+        ],
+        "messages":[
+
+        ],
+        "tags":[
+
+        ],
+        "topics":[
+
+        ]
+      }
+    }
+  ]
+}
