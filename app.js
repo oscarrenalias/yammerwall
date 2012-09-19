@@ -50,7 +50,6 @@ passport.use(new YammerStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     // check if the user belongs to the correct network and if not, kick them out
-
     if(profile._json.network_domains.indexOf(config.network_domain) == -1) {
       log.error("User does not belong to the " + config.network_domain + " network");
       return(done(
@@ -133,20 +132,15 @@ function processReferences(references) {
 var pushAPIClient = new YammerPushAPI(config.oauth_token, { type: "all" });
 pushAPIClient.on("data", function(data) {
     // this callback is trigger every time there's new data from the API
-    //for(i=0; i<data.length; i++) {
     data.map(function(yam) {
         console.log("Processing response with id = " + /*data[i].id*/ yam.id);
         // process data in the respose depending on its type
-        //if(data[i].data) {
         if(yam.data) {
             // not all messages have data to process
-            //if(data[i].data.type == "message") {
             if(yam.data.type == "message") {
-                //references = processReferences(data[i].data.data.references);
                 io.sockets.in("yammer").emit(
                     "yam", 
                     { 
-                      //messages: data[i].data.data.messages, 
                       messages: yam.data.data.messages,
                       references: processReferences(yam.data.data.references)
                     }
@@ -166,7 +160,6 @@ pushAPIClient.on("fatal", function(error) {
 
 pushAPIClient.start();
     
-// start the application **
+// start the application
 app.listen(port);
-//app.listen(port);
 console.log("Server started in port: " + port);
