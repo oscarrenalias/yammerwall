@@ -5,8 +5,11 @@ var express = require('express'),
     port = process.env.PORT || 8081,
     config = require('./config.js'),
     util = require('util'),
-    YammerStrategy = require('passport-yammer').Strategy;
-    YammerPushAPI = require('yammer-push-api-client');
+    log = require('winston'),
+    YammerStrategy = require('passport-yammer').Strategy,
+    YammerPushAPI = require('yammer-push-api-client'),
+    YammerAPIClient = require('yammer-rest-api-client'),
+    apiClient = new YammerAPIClient({token: config.oauth_token}),
     devSupport = require('./lib/devsupport.js');
 
 // configure Express
@@ -46,10 +49,19 @@ passport.use(new YammerStrategy({
     callbackURL: "/auth/yammer/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    // TODO: is this really necessary?
-    process.nextTick(function () {      
-      return done(null, profile);
-    });
+    // check if the user belongs to the correct network and if not, kick them out
+
+    if(profile._json.network_domains.indexOf(config.network_domain) == -1) {
+      log.error("User does not belong to the " + config.network_domain + " network");
+      return(done(
+        "Sorry, you do not belong to the Yammer network that has been configured for this application",
+        null
+      ));
+    }
+    else {
+      log.debug("User belongs to network " + config.network_domain);
+      return(done(null, profile));
+    }    
   }
 ));
 
@@ -156,4 +168,5 @@ pushAPIClient.start();
     
 // start the application **
 app.listen(port);
+//app.listen(port);
 console.log("Server started in port: " + port);
