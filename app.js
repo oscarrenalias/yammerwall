@@ -8,7 +8,7 @@ var express = require('express'),
     log = require('winston'),
     YammerStrategy = require('passport-yammer').Strategy,
     YammerPushAPI = require('yammer-push-api-client'),
-    YammerAPIClient = require('./lib/yammer-api-client'),
+    YammerAPIClient = require('yammer-rest-api-client'),
     apiClient = new YammerAPIClient({token: config.oauth_token}),
     devSupport = require('./lib/devsupport.js');
 
