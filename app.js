@@ -16,7 +16,11 @@ var express = require('express'),
 app.configure(function() {
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
-    app.use(express.logger());
+    
+    // access log is a bit too chatty, let's switch it off during developmet
+    if(config.mode == "prod")   
+      app.use(express.logger()) ;
+    
     app.use(express.cookieParser());
     app.use(express.bodyParser());
     app.use(express.methodOverride());

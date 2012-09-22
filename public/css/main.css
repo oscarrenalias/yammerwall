@@ -7,6 +7,10 @@ body {
 	top: 45px;
 }
 
+#yams li {
+	list-style-type: none;
+}
+
 .yam {
 	margin: 10px;
 	padding-right: 10px	;
@@ -43,7 +47,11 @@ body {
 .navbar-inner-custom {
 	padding-left: 15px;
 	padding-right: 15px;
-	background-color: red;
+}
+
+.filter {
+	margin-top: 5px;
+	height: 17px;
 }
 
 .logo {
@@ -131,6 +139,15 @@ a.navbar-link:hover {
 
 .yam-attachment-info {
 	font-size: 80%;
+}
+
+#yams .separator {
+	border-top: 1px solid #D1D1D1;
+	color: #D1D1D1;
+	text-align: center;
+	font-size: 85%;
+	padding: 0px;
+	margin: 0px;
 }
 
 .tipsy { 
