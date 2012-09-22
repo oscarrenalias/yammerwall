@@ -42,6 +42,7 @@ In this branch, configuration data is no longer configured via config.js but via
 * OAUTH_TOKEN: your OAuth 2.0 token
 * YAMMER_APPLICATION_KEY: your Yammer application key
 * YAMMER_APPLICATION_SECRET: your Yammer application secret
+* OWN_NETWORK: the name of your Yammer network (used to validate that users belong to the right network as part of the login process)
 
 Use ```heroku config:add``` to set suitable values for your configuration.
 

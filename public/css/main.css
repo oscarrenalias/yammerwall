@@ -49,9 +49,18 @@ body {
 	padding-right: 15px;
 }
 
-.filter {
+input.filter {
 	margin-top: 5px;
-	height: 17px;
+	border: 0px;
+	background-color: gray;
+	color: #D1D1D1;
+	width: 150px;
+	margin-left: 10px;
+}
+
+input.filter:focus {
+	background-color: white;
+	color: black;
 }
 
 .logo {
