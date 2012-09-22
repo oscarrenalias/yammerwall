@@ -1,0 +1,21 @@
+div.container-fluid
+	div.row-fluid
+		div.span3
+			<!-- nothing -->
+
+		div.span6(style="color:white")
+			p= result
+			p: a(href="/dev/sendyam") Send yam
+			p: a(href="/dev/sendyam/attachment") Send yam with attachment
+			div(style="color:white")				
+				form(action="/dev", method="post")
+					p Custom yam body:
+					textarea(name="body", id="body", rows="5", style="width:500px")
+					br
+					p Amount:
+					input(type="text", id="amount", name="amount", value="1") 
+					br
+					input(type="submit", id="submit")
+
+		div.span3
+			<!-- nothing -->	
