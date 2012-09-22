@@ -8,7 +8,7 @@
       gravity: $.fn.tipsy.autoNS
     });
 
-    var eventQueue = new Bacon.Bus();
+    eventQueue = new Bacon.Bus();
 
     // handy function for doing the filtering
     eventQueue.ofType = function(type) {
@@ -58,7 +58,8 @@
 
     // wire the events to receivers
     eventQueue.ofType("new-yam").flatMap(splitMessages).filter(app.filterMessage).subscribe(app.newYam);
-    eventQueue.ofType("filter-update").subscribe(app.updateFilter);    
+    eventQueue.ofType("filter-update").subscribe(app.updateFilter); 
+    eventQueue.ofType("new-yam-added").take(1).subscribe(app.hideWaitingMessage);   
   });
 
   var helpers = {
@@ -103,6 +104,11 @@
     // current filter
     filter: $('#filter').val() || "",
 
+    // Hides the waiting message when a new yam or separator is added to the timeline
+    hideWaitingMessage: function() {
+      $('.waiting').hide();
+    },
+
     // Filters messages to determine if they need to be pushed as events (and therefore be
     // made visible in the timeline). 
     // It simply checks the current value of the filter text field and uses String.search
@@ -130,11 +136,22 @@
         if(app.filter == "")
           text = "Showing all";
               
-        $('ul#yams').prepend("<li class='separator'>" + text + "</li>");
-        $('ul#yams li:first').hide().slideDown("slow");
+        // if the top-most item in the list is already a separator, let's not add
+        // a new one but change its content to avoid an ugly-looking list of separator
+        // after separator
+        var firstItemSelector = "ul#yams li:first";
+        if($(firstItemSelector).hasClass('separator')) {
+          $(firstItemSelector).text(text);
+        } 
+        else {
+          // add as a new item to the list
+          $('ul#yams').prepend("<li class='separator'>" + text + "</li>");
+          $(firstItemSelector).hide().slideDown("slow");          
+        }     
 
         // TODO: could we do this with an event?
-        $('.waiting').hide();
+        //$('.waiting').hide();
+        eventQueue.push({message: "new-yam-added", data:undefined})
     },
 
     // event handler that handles new yams
@@ -164,7 +181,7 @@
       }
 
       // TODO: could we do this with an event?
-      $('.waiting').hide();
+      eventQueue.push({message: "new-yam-added", data:yam});
     },
 
     yamTemplate: '\
