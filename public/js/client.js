@@ -121,9 +121,19 @@
         return(true);
       }
 
+      // is it a reverse filter?
+      var isReverse = (app.filter.charAt(0) === "!")
+      if(isReverse)
+        var toFilter = app.filter.substr(1, app.filter.length)
+      else
+        var toFilter = app.filter
+
       var yam = message.data.messages[0];
-      var keep = (helpers.matchWord(yam.body.plain, app.filter));
-      console.log("processing message: " + yam.id + " - result: " + keep);
+      var keep = (helpers.matchWord(yam.body.plain, toFilter));
+      if(isReverse) // TODO: is there a more straightforward way to do this?
+        keep = !keep
+
+      console.log("processing message: " + yam.id + ", filter: " + toFilter + ", reverse: " + isReverse + " - result: " + keep);
       return(keep);
     },
 
@@ -133,6 +143,8 @@
         console.log("New filter value = " + app.filter); 
         
         var text = "Filter: " + app.filter;
+        if(app.filter.charAt(0) === "!")
+            text = "Filter: NOT " + app.filter.substr(1, app.filter.length);
         if(app.filter == "")
           text = "Showing all";
               
