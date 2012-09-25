@@ -1,0 +1,24 @@
+script(src="js/client.js")
+script(src="js/Bacon.js")
+
+div.navbar.navbar-fixed-top
+	div.navbar-inner-custom
+		a(href="#").logo YammerPoll
+		||
+		input.input-large.filter#filter(type="search", data-content="Use this filter to specify a tag or specific word to filter; only yams that contain the text will be displayed and all other ones will be ignored. Delete the content to display all yams again. The '!' operator can be used to filter only the yams that do not contain the given word", data-placement="bottom", data-animation="true", data-trigger="hover", data-title="Filter")
+
+div.container-fluid
+	div.row-fluid
+		div.span3
+			<!-- nothing -->
+		div.span6
+			ul#yams
+		div.span3
+			<!-- nothing -->
+
+span.waiting
+	img(src="images/ajax-loader.gif", alt="Spinner")
+	| Waiting for yams...
+
+span.search_terms
+	| #{config.default_filter}

@@ -43,57 +43,69 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-// Use the YammerStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, and Yammer
-//   profile), and invoke a callback with a user object.
-passport.use(new YammerStrategy({
-    clientID: config.credentials.YAMMER_CONSUMER_KEY,
-    clientSecret: config.credentials.YAMMER_CONSUMER_SECRET,
-    callbackURL: "/auth/yammer/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    // check if the user belongs to the correct network and if not, kick them out
-    if(profile._json.network_domains.indexOf(config.network_domain) == -1) {
-      log.error("User does not belong to the " + config.network_domain + " network");
-      return(done(
-        "Sorry, you do not belong to the Yammer network that has been configured for this application",
-        null
-      ));
+if(config.skip_auth) {
+  console.log("************");
+  console.log("WARNING: You are running with skip_auth true; anyone with access to the application's URL will be able to see your company's stream.")
+  console.log("************");
+
+  app.get("/", function(req, res) {
+      res.render("index-noauth", { user: req.user, config:config, title: "YammerPoll" });
+  });  
+}
+else {
+  // Use the YammerStrategy within Passport.
+  //   Strategies in Passport require a `verify` function, which accept
+  //   credentials (in this case, an accessToken, refreshToken, and Yammer
+  //   profile), and invoke a callback with a user object.
+  passport.use(new YammerStrategy({
+      clientID: config.credentials.YAMMER_CONSUMER_KEY,
+      clientSecret: config.credentials.YAMMER_CONSUMER_SECRET,
+      callbackURL: "/auth/yammer/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+      // check if the user belongs to the correct network and if not, kick them out
+      if(profile._json.network_domains.indexOf(config.network_domain) == -1) {
+        log.error("User does not belong to the " + config.network_domain + " network");
+        return(done(
+          "Sorry, you do not belong to the Yammer network that has been configured for this application",
+          null
+        ));
+      }
+      else {
+        log.debug("User belongs to network " + config.network_domain);
+        return(done(null, profile));
+      }    
     }
-    else {
-      log.debug("User belongs to network " + config.network_domain);
-      return(done(null, profile));
-    }    
-  }
-));
+  ));
 
-app.get("/", ensureAuthenticated, function(req, res) {
-    res.render("index", { user: req.user, title: "YammerPoll" });
-});
-
-app.get('/login', function(req, res){
-  res.render('login', { user: req.user, title: "Login" });
-});
-
-// Initiate the Oauth authentication flow
-app.get('/auth/yammer',
-  passport.authenticate('yammer'),
-  function(req, res){
-    // The request will be redirected to Yammer for authentication, so this function will not be called.
+  app.get("/", ensureAuthenticated, function(req, res) {
+      res.render("index", { user: req.user, config: config, title: "YammerPoll" });
   });
 
-// completes the authentication process
-app.get('/auth/yammer/callback', 
-  passport.authenticate('yammer', { failureRedirect: '/login' }),
-  function(req, res) {
+  app.get('/login', function(req, res){
+    res.render('login', { user: req.user, title: "Login" });
+  });
+
+  // Initiate the Oauth authentication flow
+  app.get('/auth/yammer',
+    passport.authenticate('yammer'),
+    function(req, res){
+      // The request will be redirected to Yammer for authentication, so this function will not be called.
+    });
+
+  // completes the authentication process
+  app.get('/auth/yammer/callback', 
+    passport.authenticate('yammer', { failureRedirect: '/login' }),
+    function(req, res) {
+      res.redirect('/');
+    });
+
+  app.get('/logout', function(req, res){
+    req.logout();
     res.redirect('/');
-  });
+  });  
+}
 
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
 
 // This sets up a route that allows us to send random yams for development
 if(config.mode == "dev") {
