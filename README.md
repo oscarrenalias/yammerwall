@@ -55,3 +55,5 @@ Current list of items to be implemented, in no particular order:
 * WIP: Implement support for attachments (primarily images). Images and files already working; links and polls are also sent by Yammer as attachments and are currently not supported
 
 * The current layout is not very flexible for mobile devices, probably a stylesheet specific for mobiles should be created
+
+* Add some statistics and analytics, e.g: most active user, most active discussion, most active tag, etc.
