@@ -20,6 +20,13 @@ exports.mode = "dev";
 exports.skip_auth = true;
 
 //
-// If different from an empty array, these will be used to initialize the filter
+// Allows to listen only to all yams, yams in a group or yams with the given topic (hashtag)
 //
-exports.default_filter = ["test"];
+exports.filter = {
+	// Supported values: "all", "topic", "group"
+	type: "topic",	
+	// if type="topic", fill in this field with the id of the topic to listen for
+	topic: 1886302,	// "#taconf"
+	// if type="group", fill in this field with the id of the group to listen for
+	group: 112233,
+}
