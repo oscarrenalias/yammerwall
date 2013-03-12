@@ -145,7 +145,7 @@ function processReferences(references) {
     });    
 }
 
-var pushAPIClient = new YammerPushAPI(config.oauth_token, { type: "all" });
+var pushAPIClient = new YammerPushAPI(config.oauth_token, /*{ type: "all" }*/ config.filter);
 pushAPIClient.on("data", function(data) {
     // this callback is trigger every time there's new data from the API
     data.map(function(yam) {
