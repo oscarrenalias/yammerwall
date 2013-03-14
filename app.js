@@ -106,13 +106,6 @@ else {
   });  
 }
 
-
-// This sets up a route that allows us to send random yams for development
-if(config.mode == "dev") {
-  console.log("DEV mode activated, setting up route in /dev/sendyam");
-  devSupport.configureDevRoutes(app, io);
-}
-
 // handling of socket.io connections
 io.sockets.on('connection', function (socket) {
     console.log("New client added");
@@ -145,7 +138,26 @@ function processReferences(references) {
     });    
 }
 
-var pushAPIClient = new YammerPushAPI(config.oauth_token, /*{ type: "all" }*/ config.filter);
+function connect() {
+  if(config.mode() == "dev")
+    var client = YammerPushAPI.Mock({delay: 5000 /* 5 seconds */});
+  else
+    var client = YammerPushAPI.Client(config.oauth_token, config.filter);
+
+  return(client);
+}
+
+//
+// Set things up for development, including a mock module that generates random responses from
+// the Yammer API
+//
+if(config.mode() == "dev") {
+  console.log("DEV mode activated, setting up route in /dev/sendyam");
+  devSupport.configureDevRoutes(app, io);
+}
+
+var pushAPIClient = connect();
+
 pushAPIClient.on("data", function(data) {
     // this callback is trigger every time there's new data from the API
     data.map(function(yam) {
@@ -168,6 +180,48 @@ pushAPIClient.on("data", function(data) {
         }
     });
 });
+
+//
+// TODO: do this a little more nicely
+//
+if(config.file_writer.enabled) {
+  var DiskWriter = require("./lib/diskwriter.js");
+  var writer = new DiskWriter(config.file_writer);
+
+  pushAPIClient.on("data", function(data) {
+      data.map(function(yam) {
+      
+      // process data in the respose depending on its type
+      if(yam.data) {
+          // not all messages have data to process
+          if(yam.data.type == "message") {
+            writer.write(yam.data);
+          }
+        }
+    });
+  })  
+}
+
+//
+// TODO: do this a little more nicely
+//
+if(config.analytics.enabled) {
+  var YammerAnalytics = require("./lib/analytics.js");
+  var analytics = new YammerAnalytics(config.analytics);
+
+  pushAPIClient.on("data", function(data) {
+      data.map(function(yam) {
+      
+      // process data in the respose depending on its type
+      if(yam.data) {
+          // not all messages have data to process
+          if(yam.data.type == "message") {
+            analytics.process(yam.data);
+          }
+        }
+    });
+  })   
+}
 
 pushAPIClient.on("fatal", function(error) {
   console.log("There was an error connecting to the real-time API, please check the OAuth configuration. Exiting...");
