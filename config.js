@@ -9,25 +9,22 @@ exports.credentials = {
 	YAMMER_CONSUMER_SECRET: "WmfDUE7wvpYcNTgHn9hrQ3MccGSveuF4Lcxp3iaDkBU"
 }
 
-//
 // "dev" or "prod" - dev enables some additional features like sending random yams for testing.
 // Keep in mind that this is a function, so we can actually implement some kind of smart logic
 // to determine whether we're in "dev" or "prod" mode if needed
-//
 exports.mode = function() {
 	return("prod");
 }
 
-//
-// If this toggle is enabled, no Yammer authentication will be required to access the stream.
-// WARNING: this means that anyone with access to the application's URL will be able to see
-// the stream.
-//
-exports.skip_auth = true;
 
-//
+exports.auth = {
+	// If this toggle is enabled, no Yammer authentication will be required to access the stream.
+	// WARNING: this means that anyone with access to the application's URL will be able to see
+	// the stream.
+	disabled = false;
+}
+
 // Allows to listen only to all yams, yams in a group or yams with the given topic (hashtag)
-//
 exports.filter = {
 	// Supported values: "all", "topic", "group"
 	type: "all",	
@@ -37,11 +34,9 @@ exports.filter = {
 	group: 112233,
 }
 
-//
-// some experimental analytics features
-//
+// Some experimental analytics features
 exports.file_writer = {
-	enabled: false,
+	enabled: true,
 	folder: "./data",
 }
 
