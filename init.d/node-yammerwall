@@ -1,0 +1,214 @@
+#!/bin/sh
+## 
+##  Redhat / Linux / LSB
+##
+# chkconfig:   345 85 15
+# description: Startup script for Express / Node.js application with the \
+##              forever module.
+##
+##  A modification of https://gist.github.com/1339289
+##
+## Licensed under the GPL v2.
+
+####
+# Change this to suit your needs
+####
+DIR="/home/vagrant/yammerwall"
+
+NAME="app.js"
+FOREVER_LOG="/var/log/forever.log"
+APP_OUT_LOG="/var/log/yammerwall.out.log"
+APP_ERR_LOG="/var/log/yammerwall.err.log"
+FOREVER_OPTS="-l $FOREVER_LOG -o $APP_OUT_LOG -e $APP_ERR_LOG -a"
+
+# Source function library.
+. /etc/init.d/functions
+
+################################################################################
+################################################################################
+##                                                                            ##
+#                           APPLICATION section                                #
+##             Edit the variables below for your installation                 ##
+################################################################################
+################################################################################
+
+APP=${DIR}/${NAME}
+LOCKFILE=`basename $0 .sh`
+export NODE_ENV=${NODE_ENV:="production"}
+
+
+################################################################################
+################################################################################
+##                                                                            ##
+#                       PATHs section                                          #
+##                                                                            ##
+################################################################################
+################################################################################
+
+
+export PATH=/usr/local/bin:${PATH:=}
+export MANPATH=$HOME/local/man:${MANPATH:=}
+export LD_LIBRARY_PATH=$HOME/local/lib:${LD_LIBRARY_PATH:=}
+
+
+################################################################################
+################################################################################
+##                                                                            ##
+#                       FOREVER section                                        #
+##                                                                            ##
+################################################################################
+################################################################################
+
+
+running() {
+    forever $FOREVER_OPTS list 2>/dev/null | grep ${APP} 2>&1 >/dev/null
+    return $?
+}
+
+start_server() {
+    forever $FOREVER_OPTS start ${APP} 2>&1 >/dev/null
+    return $?
+}
+
+stop_server() {
+    forever $FOREVER_OPTS stop ${APP} 2>&1 >/dev/null
+    return $?
+}
+
+################################################################################
+################################################################################
+##                                                                            ##
+#                       GENERIC section                                        #
+##                                                                            ##
+################################################################################
+################################################################################
+
+DIETIME=10              # Time to wait for the server to die, in seconds
+                        # If this value is set too low you might not
+                        # let some servers to die gracefully and
+                        # 'restart' will not work
+
+STARTTIME=2             # Time to wait for the server to start, in seconds
+                        # If this value is set each time the server is
+                        # started (on start or restart) the script will
+                        # stall to try to determine if it is running
+                        # If it is not set and the server takes time
+                        # to setup a pid file the log message might
+                        # be a false positive (says it did not start
+                        # when it actually did)
+
+# Console logging.
+log() {
+    local STRING mode
+
+    STRING=$1
+    arg2=$2
+    mode="${arg2:=success}"
+    
+    echo -n "$STRING "
+    if [ "${RHGB_STARTED:-}" != "" -a -w /etc/rhgb/temp/rhgb-console ]; then
+	echo -n "$STRING " > /etc/rhgb/temp/rhgb-console
+    fi
+    if [ "$mode" = "success" ]; then
+	success $"$STRING"
+    else
+	failure $"$STRING"
+    fi
+    echo
+    if [ "${RHGB_STARTED:-}" != "" -a -w /etc/rhgb/temp/rhgb-console ]; then
+	if [ "$mode" = "success" ]; then
+	    echo_success > /etc/rhgb/temp/rhgb-console
+	else
+	    echo_failure > /etc/rhgb/temp/rhgb-console
+	    [ -x /usr/bin/rhgb-client ] && /usr/bin/rhgb-client --details=yes
+	fi
+	echo > /etc/rhgb/temp/rhgb-console
+    fi
+}
+
+# Starts the server.
+do_start() 
+{
+  # Check if it's running first
+    if running ;  then
+	log "$NAME already running"
+	exit 0
+    fi
+    action "Starting $NAME" start_server
+    RETVAL=$?
+    if [ $RETVAL -eq 0 ]; then
+
+     #
+     # Note to self: Forever doesn't seem to like node 0.10.x yet so "forever list" hangs well
+     # forever; if we switch it off here it will do the trick for now, but should be re-enabled
+     # once forever is updated
+     #
+
+    # NOTE: Some servers might die some time after they start,
+    # this code will detect this issue if STARTTIME is set
+    # to a reasonable value
+	#[ -n "$STARTTIME" ] && sleep $STARTTIME # Wait some time
+	#if  running ;  then
+      # It's ok, the server started and is running
+	    log "$NAME started"
+	    touch /var/lock/subsys/$LOCKFILE
+	    RETVAL=0
+	#else
+      # It is not running after we did start
+	#    log "$NAME died on startup" "failure"
+	#    RETVAL=1
+	#fi
+    fi
+    return $RETVAL
+}
+
+# Stops the server.
+do_stop() 
+{
+    if running ; then
+    # Only stop the server if we see it running
+	action "Stopping $NAME" stop_server
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/$LOCKFILE
+    else
+    # If it's not running don't do anything
+	log "$NAME not running"
+	RETVAL=0
+    fi
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+	do_start
+	RETVAL=$?
+	;;
+    stop)
+	do_stop
+	RETVAL=$?
+	;;
+    restart)
+	do_stop
+	RETVAL=$?
+	if [ $RETVAL -eq 0 ]; then
+      # Wait some sensible amount, some server need this
+	    [ -n "$DIETIME" ] && sleep $DIETIME
+	    do_start
+	    RETVAL=$?
+	fi
+	;;
+    status)
+	if running ;  then
+	    log "$NAME running"
+	else
+	    log "$NAME not running"
+	fi
+	RETVAL=0
+	;;
+    *)
+	echo "Usage: ${0} {start|stop|status|restart}"
+	RETVAL=1
+	;;
+esac
+
+exit $RETVAL
