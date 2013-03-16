@@ -81,8 +81,15 @@ else {
   app.get('/auth/yammer', passport.authenticate('yammer'), function(req, res){});
   // completes the authentication process
   app.get('/auth/yammer/callback', passport.authenticate('yammer', { failureRedirect: '/login' }), routes.callback);
-  app.get('/logout', routes.logout);  
+  app.get('/logout', routes.logout);
 }
+
+// RESTful JSON routes with the statistics
+var statsRoutes = require('./routes/routes.stats.js')(config)
+app.get("/stats/top-users", statsRoutes.top_users)
+app.get("/stats/top-topics", statsRoutes.top_topics)
+app.get("/stats/top-threads", statsRoutes.top_threads)
+app.get("/stats/top-clients", statsRoutes.top_clients)
 
 // connect and set up the handlers
 var pushAPIClient = PushAPIClient(config);
