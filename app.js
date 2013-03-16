@@ -5,7 +5,7 @@ var express = require('express'),
     config = require('./config.js'),
     util = require('util'),
     log = require('winston'),
-    PushAPIClient = require('./lib/client'),
+    PushAPIClient = require('./lib/apiclient'),
     YammerStrategy = require('passport-yammer').Strategy;
 
 // configure Express
