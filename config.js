@@ -21,7 +21,7 @@ exports.auth = {
 	// If this toggle is enabled, no Yammer authentication will be required to access the stream.
 	// WARNING: this means that anyone with access to the application's URL will be able to see
 	// the stream.
-	disabled = false;
+	disabled: true
 }
 
 // Allows to listen only to all yams, yams in a group or yams with the given topic (hashtag)
@@ -45,6 +45,6 @@ exports.analytics = {
 
 	mongo: {
 		uri: process.env.MONGOLAB_URI || "mongodb://192.168.33.190/yammerwall",
-		collection: "yams",
+		collection: "yams"
 	}
 }
