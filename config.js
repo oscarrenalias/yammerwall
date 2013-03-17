@@ -36,7 +36,7 @@ exports.filter = {
 
 // Some experimental analytics features
 exports.file_writer = {
-	enabled: true,
+	enabled: false,
 	folder: "./data",
 }
 

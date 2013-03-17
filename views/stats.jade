@@ -1,0 +1,33 @@
+script(src="js/Bacon.js")
+script(src="js/underscore.js")
+script(src="js/jquery.ajaxrefresh.js")
+script(src="js/stats.js")
+
+script(id="tmpl-top-users", type="text/template")
+	|<% _.each(data, function(user) { %>
+	|	<li class="user">
+	|		<a href="<%= user._id.web_url %>">
+	|			<img src="<%= user._id.mugshot_url %>" alt="<%= user._id.name %>" />
+	|		</a>
+	|	</li>
+	|<% }) %>
+
+script(id="tmpl-top-topics", type="text/template")
+	|<% _.each(data, function(topic) { %>
+	|	<li class="topic">
+	|		<%= topic._id %>
+	|	</li>
+	|<% }) %>	
+
+div.navbar.navbar-fixed-top
+	div.navbar-inner-custom
+		a(href="#").logo YammerWall // Statistics
+
+div.container-fluid
+	div.row-fluid
+		div.span4
+			ul#top-users
+		div.span4
+			ul#top-topics
+		div.span4
+			ul#top-threads
