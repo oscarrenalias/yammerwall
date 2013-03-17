@@ -85,11 +85,15 @@ else {
 }
 
 // RESTful JSON routes with the statistics
+// TODO: we can probably replace all these hand-coded routes with a catch-all /stats/collections/:coll-id
+// and with a smarter router/controller that will know to which collection to route it
 var statsRoutes = require('./routes/routes.stats.js')(config)
-app.get("/stats/top-users", statsRoutes.top_users)
-app.get("/stats/top-topics", statsRoutes.top_topics)
-app.get("/stats/top-threads", statsRoutes.top_threads)
-app.get("/stats/top-clients", statsRoutes.top_clients)
+app.get("/stats/collections/top_users", statsRoutes.top_users)
+app.get("/stats/collections/top_topics", statsRoutes.top_topics)
+app.get("/stats/collections/top_threads", statsRoutes.top_threads)
+app.get("/stats/collections/top_clients", statsRoutes.top_clients)
+app.get("/stats/collections/hourly_activity", statsRoutes.hourly_activity)
+app.get("/stats", statsRoutes.ui)
 
 // connect and set up the handlers
 var pushAPIClient = PushAPIClient(config);

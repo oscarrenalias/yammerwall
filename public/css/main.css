@@ -180,3 +180,21 @@ a.navbar-link:hover {
   max-width: 400px;
   text-align: left;
 }
+
+/*
+ Styles for the stats page
+ */
+#top-users {
+	position: relative;
+	top: 45px;
+}
+
+#top-users li {
+	list-style-type: none;
+	float: left;
+} 
+
+#top-users .user {
+	color:white;
+	margin: 5px;
+}
