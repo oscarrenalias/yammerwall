@@ -15,7 +15,14 @@ script(id="tmpl-top-users", type="text/template")
 script(id="tmpl-top-topics", type="text/template")
 	|<% _.each(data, function(topic) { %>
 	|	<li class="topic">
-	|		<%= topic._id %>
+	|		#<%= topic._id %>
+	|	</li>
+	|<% }) %>
+
+script(id="tmpl-top-threads", type="text/template")
+	|<% _.each(data, function(thread) { %>
+	|	<li class="thread">
+	|		<a href="<%= thread._id.web_url %>"><%= thread._id.content_excerpt %></a>
 	|	</li>
 	|<% }) %>	
 
@@ -25,9 +32,16 @@ div.navbar.navbar-fixed-top
 
 div.container-fluid
 	div.row-fluid
-		div.span4
+		div.span2			
+		div.span8
+			span.title
+				| Most active users
 			ul#top-users
-		div.span4
+			span.title
+				| Most active topics
 			ul#top-topics
-		div.span4
+			span.title
+				| Most active threads
 			ul#top-threads
+		div.span2
+			
