@@ -5,8 +5,8 @@ exports.oauth_token = "NaH7oqK11F4E4ERiMFVA";
 exports.network_domain = "accenture.com";
 
 exports.credentials = {
-	YAMMER_CONSUMER_KEY: "mRVIv8MI88hqmm4hXzymAQ",
-	YAMMER_CONSUMER_SECRET: "WmfDUE7wvpYcNTgHn9hrQ3MccGSveuF4Lcxp3iaDkBU"
+	YAMMER_CONSUMER_KEY: "B9Uad7ZMGpfGYQnXQ7ASg",
+	YAMMER_CONSUMER_SECRET: "zy0nbGdyKoHQZTcuePZ6C7CU5MN58m3CwB4f7d66JA"
 }
 
 // "dev" or "prod" - dev enables some additional features like sending random yams for testing.
