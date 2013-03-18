@@ -3,28 +3,7 @@ script(src="js/underscore.js")
 script(src="js/jquery.ajaxrefresh.js")
 script(src="js/stats.js")
 
-script(id="tmpl-top-users", type="text/template")
-	|<% _.each(data, function(user) { %>
-	|	<li class="user">
-	|		<a href="<%= user._id.web_url %>">
-	|			<img src="<%= user._id.mugshot_url %>" alt="<%= user._id.name %>" />
-	|		</a>
-	|	</li>
-	|<% }) %>
-
-script(id="tmpl-top-topics", type="text/template")
-	|<% _.each(data, function(topic) { %>
-	|	<li class="topic">
-	|		#<%= topic._id %>
-	|	</li>
-	|<% }) %>
-
-script(id="tmpl-top-threads", type="text/template")
-	|<% _.each(data, function(thread) { %>
-	|	<li class="thread">
-	|		<a href="<%= thread._id.web_url %>"><%= thread._id.content_excerpt %></a>
-	|	</li>
-	|<% }) %>	
+include includes/templates
 
 div.navbar.navbar-fixed-top
 	div.navbar-inner-custom

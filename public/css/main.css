@@ -91,18 +91,21 @@ a.navbar-link:hover {
 }
 
 .waiting {
-	width:auto;
+	/*width:auto;
 	height:auto;
-	position:absolute;
+	position:relative;
 	left:50%;
-	top:50%;
-	margin:-75px 0 0 -135px;
+	top:150%;
+	margin:-175px 0 0 -135px;*/
 	background-color: white;
 	padding: 10px 30px 10px 30px;
 	-webkit-border-radius: 10px;
 	-khtml-border-radius: 10px;	
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+	position: relative;
+	top: 75px;
+	left: 135px;
 }
 
 .waiting a {
@@ -233,4 +236,5 @@ a.navbar-link:hover {
 	list-style-type: none;
 	color: white;
 	float: left;
+	padding-top: 1em;
 }

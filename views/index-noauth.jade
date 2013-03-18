@@ -1,5 +1,10 @@
+script(src="js/underscore.js")
+script(src="js/jquery.ajaxrefresh.js")
 script(src="js/client.js")
+script(src="js/stats.js")
 script(src="js/Bacon.js")
+
+include includes/templates
 
 div.navbar.navbar-fixed-top
 	div.navbar-inner-custom
@@ -7,16 +12,31 @@ div.navbar.navbar-fixed-top
 
 div.container-fluid
 	div.row-fluid
-		div.span1
-			<!-- nothing -->
-		div.span9
-			ul#yams
-		div.span1
-			<!-- nothing -->
+		- if(config.analytics.show_in_front_page == true)
+			div.span8
+				ul#yams
+				span.waiting
+					img(src="images/ajax-loader.gif", alt="Spinner")
+					| Waiting for yams...
 
-span.waiting
-	img(src="images/ajax-loader.gif", alt="Spinner")
-	| Waiting for yams...
+			div.spain1
+			div.span3
+				span.title
+					| Most active users
+				ul#top-users
+				span.title
+					| Most active topics
+				ul#top-topics
+				span.title
+					| Most active threads
+				ul#top-threads
+		- else
+			div.span1
+			div.span10
+				img(src="images/ajax-loader.gif", alt="Spinner")
+				| Waiting for yams...
+				ul#yams
+			div.span1
 
 span.search_terms
 	| #{config.default_filter}
