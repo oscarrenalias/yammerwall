@@ -41,7 +41,11 @@ exports.file_writer = {
 }
 
 exports.analytics = {
+	// Control the analytics jobs and processing
 	enabled: true,
+
+	// Whether some of the analytics data should be shown in the front page
+	show_in_front_page: true,
 
 	mongo: {
 		uri: process.env.MONGOLAB_URI || "mongodb://192.168.33.190/yammerwall",

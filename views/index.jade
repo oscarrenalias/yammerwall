@@ -1,6 +1,8 @@
 script(src="js/client.js")
 script(src="js/Bacon.js")
 
+include includes/templates
+
 div.navbar.navbar-fixed-top
 	div.navbar-inner-custom
 		a(href="#").logo YammerWall
@@ -15,12 +17,30 @@ div.navbar.navbar-fixed-top
 
 div.container-fluid
 	div.row-fluid
-		div.span3
-			<!-- nothing -->
-		div.span6
-			ul#yams
-		div.span3
-			<!-- nothing -->
+		- if(config.analytics.show_in_front_page == true)
+			div.span8
+				ul#yams
+			div.spain1
+			div.span3
+				span.title
+					| Most active users
+				ul#top-users
+				span.title
+					| Most active topics
+				ul#top-topics
+				span.title
+					| Most active threads
+				ul#top-threads
+				span.waiting
+					img(src="images/ajax-loader.gif", alt="Spinner")
+					| Waiting for yams...
+		- else
+			div.span2
+			div.span8
+				img(src="images/ajax-loader.gif", alt="Spinner")
+				| Waiting for yams...
+				ul#yams
+			div.span2
 
 span.waiting
 	img(src="images/ajax-loader.gif", alt="Spinner")
