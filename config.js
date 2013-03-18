@@ -21,7 +21,7 @@ exports.auth = {
 	// If this toggle is enabled, no Yammer authentication will be required to access the stream.
 	// WARNING: this means that anyone with access to the application's URL will be able to see
 	// the stream.
-	disabled: true
+	disabled: false
 }
 
 // Allows to listen only to all yams, yams in a group or yams with the given topic (hashtag)
