@@ -15,9 +15,9 @@ module.exports = function(config) {
 	}
 
 	return {
-		top_users: MongoCollectionRoute("top_users", 20),
+		top_users: MongoCollectionRoute("top_users", 25),
 		top_clients: MongoCollectionRoute("top_clients", 0),
-		top_threads: MongoCollectionRoute("top_threads", 20),
+		top_threads: MongoCollectionRoute("top_threads", 10),
 		top_topics: MongoCollectionRoute("top_topics", 20),
 		hourly_activity: MongoCollectionRoute("hourly_activity", 0),
 		ui: function(req, res) {
