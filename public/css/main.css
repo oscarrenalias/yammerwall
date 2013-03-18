@@ -187,6 +187,7 @@ a.navbar-link:hover {
 #top-users {
 	position: relative;
 	top: 45px;
+	float: left;
 }
 
 #top-users li {
@@ -195,6 +196,41 @@ a.navbar-link:hover {
 } 
 
 #top-users .user {
-	color:white;
+	color:#D1D1D1;
 	margin: 5px;
+}
+
+#top-topics {
+	position: relative;
+	top: 45px;
+	float: left;
+	width: 100%;
+}
+
+#top-topics li {
+	list-style-type: none;
+	float: left;
+	padding-right: 1em;
+	color: #D1D1D1;
+}
+
+#top-threads {
+	position: relative;
+	top: 45px;
+	float: left;
+}
+
+.title {
+	position: relative;
+	top: 45px;
+	display: block;
+	font-size: 1.2em;
+	color: #D1D1D1;
+	margin-bottom: 1em;
+}
+
+#top-threads li {
+	list-style-type: none;
+	color: white;
+	float: left;
 }
