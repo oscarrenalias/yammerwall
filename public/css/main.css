@@ -2,6 +2,10 @@ body {
 	background-color: #2a2e38;
 }
 
+.navbar-fixed-top {
+	background-color: #2a2e38;
+}
+
 #yams {
 	position: relative;
 	top: 45px;
