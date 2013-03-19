@@ -1,8 +1,4 @@
-script(src="js/Bacon.js")
-script(src="js/underscore.js")
-script(src="js/jquery.ajaxrefresh.js")
-script(src="js/stats.js")
-
+include includes/javascript
 include includes/templates
 
 div.navbar.navbar-fixed-top
@@ -13,14 +9,21 @@ div.container-fluid
 	div.row-fluid
 		div.span2			
 		div.span8
-			span.title
-				| Most active users
-			ul#top-users
-			span.title
-				| Most active topics
-			ul#top-topics
-			span.title
-				| Most active threads
-			ul#top-threads
+			div.stats
+				span.title Most active users
+					ul#top-users
+						li
+							img(src="images/ajax-loader-dark.gif", alt="Spinner") 
+							| Waiting...
+				span.title Most active topics
+				ul#top-topics
+					li 
+						img(src="images/ajax-loader-dark.gif", alt="Spinner") 
+						| Waiting...
+				span.title Most active threads
+				ul#top-threads
+					li 
+						img(src="images/ajax-loader-dark.gif", alt="Spinner") 
+						| Waiting...
 		div.span2
 			
