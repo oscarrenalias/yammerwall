@@ -1,5 +1,5 @@
 /**
- * Adds test routes to the application
+ * Development routes
  */
  var _ = require('underscore');
 
@@ -67,19 +67,18 @@ function generateTestAttachment(yam) {
   return(yam);
 }
 
-module.exports.configureDevRoutes = function(app, io) {
+module.exports = function(config, io) {
   function sendYam(data) {
-    io.sockets.in("yammer").emit( "yam", {
-      messages: [ data.yam ], 
-      references: { 
-        users: [ data.user ],
-        threads: [],
-        tags: [],
-        topics: [],
-        messages: []
-      }
-    });
-  }
+  io.sockets.in("yammer").emit( "yam", {
+    messages: [ data.yam ], 
+    references: { 
+      users: [ data.user ],
+      threads: [],
+      tags: [],
+      topics: [],
+      messages: []
+    }
+  });
 
   app.get("/dev", function(req, res) {
     res.render("dev/index.jade", {title:"Dev Support", result:undefined, data:{}});

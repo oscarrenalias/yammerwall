@@ -1,16 +1,12 @@
 var express = require('express'),
-    app = express.createServer(),
-    io = require('socket.io').listen(app),
+    app = express.createServer(),    
     passport = require('passport'),
     port = process.env.PORT || 8081,
     config = require('./config.js'),
     util = require('util'),
     log = require('winston'),
-    YammerStrategy = require('passport-yammer').Strategy,
-    YammerPushAPI = require('yammer-push-api-client'),
-    YammerAPIClient = require('yammer-rest-api-client'),
-    apiClient = new YammerAPIClient({token: config.oauth_token}),
-    devSupport = require('./lib/devsupport.js');
+    PushAPIClient = require('./lib/apiclient'),
+    YammerStrategy = require('passport-yammer').Strategy;
 
 // configure Express
 app.configure(function() {
@@ -18,7 +14,7 @@ app.configure(function() {
     app.set('view engine', 'jade');
     
     // access log is a bit too chatty, let's switch it off during developmet
-    if(config.mode == "prod")   
+    if(config.mode() == "prod")   
       app.use(express.logger()) ;
     
     app.use(express.cookieParser());
@@ -43,125 +39,68 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-// Use the YammerStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, and Yammer
-//   profile), and invoke a callback with a user object.
-passport.use(new YammerStrategy({
-    clientID: config.credentials.YAMMER_CONSUMER_KEY,
-    clientSecret: config.credentials.YAMMER_CONSUMER_SECRET,
-    callbackURL: "/auth/yammer/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    // check if the user belongs to the correct network and if not, kick them out
-    if(profile._json.network_domains.indexOf(config.network_domain) == -1) {
-      log.error("User does not belong to the " + config.network_domain + " network");
-      return(done(
-        "Sorry, you do not belong to the Yammer network that has been configured for this application",
-        null
-      ));
+if(config.auth.disabled) {
+  console.log("************");
+  console.log("WARNING: You are running with config.auth.disabled true; anyone with access to the application's URL will be able to see your company's stream.")
+  console.log("************");
+
+  app.get("/", require('./routes/routes')(config).index);  
+}
+else {
+  passport.use(new YammerStrategy({
+      clientID: config.credentials.YAMMER_CONSUMER_KEY,
+      clientSecret: config.credentials.YAMMER_CONSUMER_SECRET,
+      callbackURL: "/auth/yammer/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+      // check if the user belongs to the correct network and if not, kick them out
+      if(profile._json.network_domains.indexOf(config.network_domain) == -1) {
+        log.error("User does not belong to the " + config.network_domain + " network");
+        return(done(
+          "Sorry, you do not belong to the Yammer network that has been configured for this application",
+          null
+        ));
+      }
+      else {
+        log.debug("User belongs to network " + config.network_domain);
+        return(done(null, profile));
+      }    
     }
-    else {
-      log.debug("User belongs to network " + config.network_domain);
-      return(done(null, profile));
-    }    
-  }
-));
+  ));
 
-app.get("/", ensureAuthenticated, function(req, res) {
-    res.render("index", { user: req.user, title: "YammerPoll" });
-});
+  function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('/login')
+  }    
 
-app.get('/login', function(req, res){
-  res.render('login', { user: req.user, title: "Login" });
-});
-
-// Initiate the Oauth authentication flow
-app.get('/auth/yammer',
-  passport.authenticate('yammer'),
-  function(req, res){
-    // The request will be redirected to Yammer for authentication, so this function will not be called.
-  });
-
-// completes the authentication process
-app.get('/auth/yammer/callback', 
-  passport.authenticate('yammer', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
-
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
-
-// This sets up a route that allows us to send random yams for development
-if(config.mode == "dev") {
-  console.log("DEV mode activated, setting up route in /dev/sendyam");
-  devSupport.configureDevRoutes(app, io);
+  var routes = require('./routes/routes')(config);
+  app.get("/", ensureAuthenticated, routes.index);
+  app.get('/login', routes.login);
+  // Initiate the Oauth authentication flow - please note that the request will be redirected to Yammer for authentication, 
+  // so this function's callback will not be called.
+  app.get('/auth/yammer', passport.authenticate('yammer'), function(req, res){});
+  // completes the authentication process
+  app.get('/auth/yammer/callback', passport.authenticate('yammer', { failureRedirect: '/login' }), routes.callback);
+  app.get('/logout', routes.logout);
 }
 
-// handling of socket.io connections
-io.sockets.on('connection', function (socket) {
-    console.log("New client added");
-    socket.join('yammer');
-});
+// RESTful JSON routes with the statistics
+// TODO: we can probably replace all these hand-coded routes with a catch-all /stats/collections/:coll-id
+// and with a smarter router/controller that will know to which collection to route it
+var statsRoutes = require('./routes/routes.stats.js')(config)
+app.get("/stats/collections/top_users", statsRoutes.top_users)
+app.get("/stats/collections/top_topics", statsRoutes.top_topics)
+app.get("/stats/collections/top_threads", statsRoutes.top_threads)
+app.get("/stats/collections/top_clients", statsRoutes.top_clients)
+app.get("/stats/collections/hourly_activity", statsRoutes.hourly_activity)
+app.get("/stats", statsRoutes.ui)
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login')
-}  
-
-// extracts the list of users from the references section
-function processReferences(references) {
-    return({
-      users: references.filter(function(item) {
-        return(item.type == "user");
-      }),
-      threads: references.filter(function(item) {
-        return(item.type == "thread");
-      }),
-      messages: references.filter(function(item) {
-        return(item.type == "message");
-      }),
-      tags: references.filter(function(item) {
-        return(item.type == "tag");
-      }),
-      topics: references.filter(function(item) {
-        return(item.type == "topic");
-      })
-    });    
-}
-
-var pushAPIClient = new YammerPushAPI(config.oauth_token, { type: "all" });
-pushAPIClient.on("data", function(data) {
-    // this callback is trigger every time there's new data from the API
-    data.map(function(yam) {
-        console.log("Processing response with id = " + /*data[i].id*/ yam.id);
-        // process data in the respose depending on its type
-        if(yam.data) {
-            // not all messages have data to process
-            if(yam.data.type == "message") {
-                io.sockets.in("yammer").emit(
-                    "yam", 
-                    { 
-                      messages: yam.data.data.messages,
-                      references: processReferences(yam.data.data.references)
-                    }
-                );
-            }
-            else {
-                console.log("There was no message data to process");
-            }                                                
-        }
-    });
-});
-
-pushAPIClient.on("fatal", function(error) {
-  console.log("There was an error connecting to the real-time API, please check the OAuth configuration. Exiting...");
-  process.exit(-1);
-})
-
+// connect and set up the handlers
+var pushAPIClient = PushAPIClient(config);
+pushAPIClient.on("data", require('./lib/handlers/clients').handler(config, app));
+pushAPIClient.on("data", require('./lib/handlers/diskwriter').handler(config, app));
+pushAPIClient.on("data", require('./lib/analytics/handler').handler(config, app));
+pushAPIClient.on("fatal", require('./lib/handlers/fatal.js').handler(config, app));
 pushAPIClient.start();
     
 // start the application

@@ -2,6 +2,10 @@ body {
 	background-color: #2a2e38;
 }
 
+.navbar-fixed-top {
+	background-color: #2a2e38;
+}
+
 #yams {
 	position: relative;
 	top: 45px;
@@ -91,18 +95,29 @@ a.navbar-link:hover {
 }
 
 .waiting {
-	width:auto;
-	height:auto;
-	position:absolute;
-	left:50%;
-	top:50%;
-	margin:-75px 0 0 -135px;
 	background-color: white;
 	padding: 10px 30px 10px 30px;
 	-webkit-border-radius: 10px;
 	-khtml-border-radius: 10px;	
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+	position: relative;
+	width: 100%;
+	left: 40%;
+	top: 45px;
+}
+
+.login {
+	width:auto;
+	height:auto;
+	margin:75px 200px 0 200px;
+	background-color: white;
+	padding: 10px 30px 10px 30px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;	
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	text-align: center;
 }
 
 .waiting a {
@@ -179,4 +194,43 @@ a.navbar-link:hover {
   /* make it a little wider */
   max-width: 400px;
   text-align: left;
+}
+
+/*
+ Styles for the stats
+ */
+.stats {
+	color: #D1D1D1;
+	position: relative;
+	top: 45px;
+}
+
+.stats ul {
+	float: left;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 1em;
+}
+
+.stats li {
+	list-style-type: none;
+	float: left;
+}
+
+.title {
+	display: block;
+	font-size: 1.2em;
+}
+
+#top-users .user {	
+	margin: 2px;
+}
+
+#top-topics li {
+	padding-right: 1em;
+}
+
+#top-threads li {
+	padding-bottom: 1em;
 }
