@@ -8,11 +8,7 @@
 module.exports = function(config) {
 	return {
 		index: function(req, res) {
-			res.render("index", { user: req.user, config: config, title: "YammerWall" });
-		},
-
-		indexNoAuth: function(req, res) {
-			res.render("index-noauth", { user: req.user, config:config, title: "YammerWall" });
+			res.render("index", { user: req.user, config: config, title: config.ui.title });
 		},
 
 		login: function(req, res){
