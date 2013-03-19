@@ -104,8 +104,11 @@ a.navbar-link:hover {
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 	position: relative;
-	top: 75px;
-	left: 135px;
+	/*top: 75px;
+	left: 135px;*/
+	width: 100%;
+	left: 40%;
+	top: 100px;
 }
 
 .login {
