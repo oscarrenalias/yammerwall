@@ -5,8 +5,8 @@ exports.oauth_token = "NaH7oqK11F4E4ERiMFVA";
 exports.network_domain = "accenture.com";
 
 exports.credentials = {
-	YAMMER_CONSUMER_KEY: "B9Uad7ZMGpfGYQnXQ7ASg",
-	YAMMER_CONSUMER_SECRET: "zy0nbGdyKoHQZTcuePZ6C7CU5MN58m3CwB4f7d66JA"
+	YAMMER_CONSUMER_KEY: "mRVIv8MI88hqmm4hXzymAQ",
+	YAMMER_CONSUMER_SECRET: "WmfDUE7wvpYcNTgHn9hrQ3MccGSveuF4Lcxp3iaDkBU"
 }
 
 // "dev" or "prod" - dev enables some additional features like sending random yams for testing.
@@ -16,12 +16,18 @@ exports.mode = function() {
 	return("prod");
 }
 
+exports.ui = {
+	// enable or disable the client-side search box
+	show_search: false,
+	// title to show at the top of the page
+	title: "YammerWall"
+}
 
 exports.auth = {
 	// If this toggle is enabled, no Yammer authentication will be required to access the stream.
 	// WARNING: this means that anyone with access to the application's URL will be able to see
 	// the stream.
-	disabled: false
+	disabled: true
 }
 
 // Allows to listen only to all yams, yams in a group or yams with the given topic (hashtag)

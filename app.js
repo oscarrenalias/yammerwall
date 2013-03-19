@@ -44,7 +44,7 @@ if(config.auth.disabled) {
   console.log("WARNING: You are running with config.auth.disabled true; anyone with access to the application's URL will be able to see your company's stream.")
   console.log("************");
 
-  app.get("/", require('./routes/routes')(config).indexNoAuth);  
+  app.get("/", require('./routes/routes')(config).index);  
 }
 else {
   passport.use(new YammerStrategy({

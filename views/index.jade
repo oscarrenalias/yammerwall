@@ -3,15 +3,17 @@ include includes/templates
 
 div.navbar.navbar-fixed-top
 	div.navbar-inner-custom
-		a(href="#").logo YammerWall
-		||
-		input.input-large.filter#filter(type="search", data-content="Use this filter to specify a tag or specific word to filter; only yams that contain the text will be displayed and all other ones will be ignored. Delete the content to display all yams again. The '!' operator can be used to filter only the yams that do not contain the given word", data-placement="bottom", data-animation="true", data-trigger="hover", data-title="Filter")
-
-		p.navbar-text.pull-right
-			img(src="#{user._json.mugshot_url}", alt="").mugshot
-			a(href="#").navbar-link #{user.displayName}			
+		a(href="#").logo #{title}
+		- if(config.ui.show_search) 
 			||
-			a(href="/logout").navbar-link Logout
+			input.input-large.filter#filter(type="search", data-content="Use this filter to specify a tag or specific word to filter; only yams that contain the text will be displayed and all other ones will be ignored. Delete the content to display all yams again. The '!' operator can be used to filter only the yams that do not contain the given word", data-placement="bottom", data-animation="true", data-trigger="hover", data-title="Filter")
+
+		- if(config.auth.disabled == false)
+			p.navbar-text.pull-right
+				img(src="#{user._json.mugshot_url}", alt="").mugshot
+				a(href="#").navbar-link #{user.displayName}			
+				||
+				a(href="/logout").navbar-link Logout
 
 div.container-fluid
 	div.row-fluid
