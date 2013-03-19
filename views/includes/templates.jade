@@ -1,7 +1,7 @@
 script(id="tmpl-top-users", type="text/template")
 	|<% _.each(data, function(user) { %>
 	|	<li class="user">
-	|		<a href="<%= user._id.web_url %>">
+	|		<a href="<%= user._id.web_url %>" title="<%= user.value %> posts">
 	|			<img src="<%= user._id.mugshot_url %>" alt="<%= user._id.name %>" />
 	|		</a>
 	|	</li>

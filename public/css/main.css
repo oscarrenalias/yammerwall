@@ -91,12 +91,6 @@ a.navbar-link:hover {
 }
 
 .waiting {
-	/*width:auto;
-	height:auto;
-	position:relative;
-	left:50%;
-	top:150%;
-	margin:-175px 0 0 -135px;*/
 	background-color: white;
 	padding: 10px 30px 10px 30px;
 	-webkit-border-radius: 10px;
@@ -104,11 +98,9 @@ a.navbar-link:hover {
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 	position: relative;
-	/*top: 75px;
-	left: 135px;*/
 	width: 100%;
 	left: 40%;
-	top: 100px;
+	top: 45px;
 }
 
 .login {
@@ -201,56 +193,40 @@ a.navbar-link:hover {
 }
 
 /*
- Styles for the stats page
+ Styles for the stats
  */
-#top-users {
+.stats {
+	color: #D1D1D1;
 	position: relative;
 	top: 45px;
-	float: left;
 }
 
-#top-users li {
-	list-style-type: none;
-	float: left;
-} 
-
-#top-users .user {
-	color:#D1D1D1;
-	margin: 5px;
-}
-
-#top-topics {
-	position: relative;
-	top: 45px;
+.stats ul {
 	float: left;
 	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 1em;
 }
 
-#top-topics li {
+.stats li {
 	list-style-type: none;
-	float: left;
-	padding-right: 1em;
-	color: #D1D1D1;
-}
-
-#top-threads {
-	position: relative;
-	top: 45px;
 	float: left;
 }
 
 .title {
-	position: relative;
-	top: 45px;
 	display: block;
 	font-size: 1.2em;
-	color: #D1D1D1;
-	margin-bottom: 1em;
+}
+
+#top-users .user {	
+	margin: 2px;
+}
+
+#top-topics li {
+	padding-right: 1em;
 }
 
 #top-threads li {
-	list-style-type: none;
-	color: white;
-	float: left;
 	padding-bottom: 1em;
 }
