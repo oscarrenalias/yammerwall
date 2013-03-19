@@ -108,6 +108,19 @@ a.navbar-link:hover {
 	left: 135px;
 }
 
+.login {
+	width:auto;
+	height:auto;
+	margin:75px 200px 0 200px;
+	background-color: white;
+	padding: 10px 30px 10px 30px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;	
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	text-align: center;
+}
+
 .waiting a {
 	color: #000;
 }
