@@ -227,11 +227,12 @@
         </div> \
         {{/yam.attachments}} \
         <div class="yam-info"> \
-          Posted by <span class="yam-user">{{user.full_name}}</span>, \
+          Posted by <span class="yam-user">{{user.full_name}}</span> \
           <abbr class="timeago" title="{{yam.created_at}}">{{#asDate}}{{yam.created_at}}{{/asDate}}</abbr> \
           {{#inReplyTo}} \
             <a href="#" class="live-tipsy" title="{{reply_to_message.body.plain}}">in reply to</a> {{reply_to_user.full_name}} \
           {{/inReplyTo}} \
+          . <a href="{{yam.web_url}}">See conversation in Yammer</a>. \
         <div> \
       </li>',
 
