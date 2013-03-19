@@ -1,0 +1,22 @@
+script(id="tmpl-top-users", type="text/template")
+	|<% _.each(data, function(user) { %>
+	|	<li class="user">
+	|		<a href="<%= user._id.web_url %>" title="<%= user.value %> yams">
+	|			<img src="<%= user._id.mugshot_url %>" alt="<%= user._id.name %>" />
+	|		</a>
+	|	</li>
+	|<% }) %>
+
+script(id="tmpl-top-topics", type="text/template")
+	|<% _.each(data, function(topic) { %>
+	|	<li class="topic">
+	|		#<%= topic._id %>
+	|	</li>
+	|<% }) %>
+
+script(id="tmpl-top-threads", type="text/template")
+	|<% _.each(data, function(thread) { %>
+	|	<li class="thread">
+	|		<a href="<%= thread._id.web_url %>" title="<%= thread.value%> yams"><%= thread._id.content_excerpt %></a>
+	|	</li>
+	|<% }) %>
