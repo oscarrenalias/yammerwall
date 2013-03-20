@@ -24,10 +24,25 @@ exports.ui = {
 }
 
 exports.auth = {
-	// If this toggle is enabled, no Yammer authentication will be required to access the stream.
-	// WARNING: this means that anyone with access to the application's URL will be able to see
-	// the stream.
-	disabled: true
+	//
+	// One of:
+	//	"none" - free access
+	//	"basic" - use HTTP basic auth, using the user and password provided below
+	//	"oauth" - enable Yammer OAuth2 authentication
+	//
+	type: "basic",
+
+	// HTTP Basic auth configuration
+	basic: {
+		user: "testUser",
+		password: "testPassword",
+	},
+
+	// OAuth configuration
+	oauth: {
+		key: "mRVIv8MI88hqmm4hXzymAQ",
+		secret: "WmfDUE7wvpYcNTgHn9hrQ3MccGSveuF4Lcxp3iaDkBU"
+	}
 }
 
 // Allows to listen only to all yams, yams in a group or yams with the given topic (hashtag)

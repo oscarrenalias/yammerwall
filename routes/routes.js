@@ -9,20 +9,6 @@ module.exports = function(config) {
 	return {
 		index: function(req, res) {
 			res.render("index", { user: req.user, config: config, title: config.ui.title });
-		},
-
-		login: function(req, res){
-			res.render('login', { user: req.user, title: "Login" });
-		},
-
-		// successful log in
-		callback: function(req, res) {
-			res.redirect('/');
-		},
-
-		logout: function(req, res) {
-			req.logout();
-			res.redirect('/');
 		}
 	}
 }
