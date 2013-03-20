@@ -4,11 +4,6 @@ exports.oauth_token = process.env.OAUTH_TOKEN
 // is used to validate that users belong to the same network
 exports.network_domain = process.env.OWN_NETWORK
 
-exports.credentials = {
-	"YAMMER_CONSUMER_KEY": process.env.YAMMER_CONSUMER_KEY,
-	"YAMMER_CONSUMER_SECRET": process.env.YAMMER_CONSUMER_SECRET
-}
-
 // "dev" or "prod" - dev enables some additional features like sending random yams for testing.
 // Keep in mind that this is a function, so we can actually implement some kind of smart logic
 // to determine whether we're in "dev" or "prod" mode if needed
@@ -40,8 +35,8 @@ exports.auth = {
 
 	// OAuth configuration
 	oauth: {
-		key: "mRVIv8MI88hqmm4hXzymAQ",
-		secret: "WmfDUE7wvpYcNTgHn9hrQ3MccGSveuF4Lcxp3iaDkBU"
+		key: process.env.YAMMER_CONSUMER_KEY,
+		secret: process.env.YAMMER_CONSUMER_SECRET
 	}
 }
 
