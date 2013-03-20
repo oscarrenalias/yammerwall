@@ -8,6 +8,18 @@
       gravity: $.fn.tipsy.autoNS
     });
 
+    var ApplicationEvents = {
+      NewYam: "new-yam",
+      NewYamAdded: "new-yam-added",
+      FilterUpdate: "filter-update",
+      Connected: "connected",
+      Reconnected: "reconnected",
+      Disconnected: "disconnected",
+      ConnectFailed: "connect_failed",
+      Reconnecting: "reconnecting",
+      ReconnectFailed: "reconnect_failed"
+    }
+
     eventQueue = new Bacon.Bus();
 
     // handy function for doing the filtering
@@ -16,6 +28,28 @@
         return(message.message == type);
       }));      
     }  
+
+    // The server may send more than one yam in the single socket.io message,
+    // so we will split that into an array of a single message each, keeping the same
+    // references, metadata, etc; doing so we can implement message filtering much
+    // more easily
+    var splitMessages = function(message) {
+      var splitData = message.data.messages.map(function(yam) {
+        var data = message;
+        data.data.messages = [ yam ];
+        return(data);
+      });
+
+      return(Bacon.sequentially(0, splitData));
+    } 
+
+    // wire the events to receivers
+    eventQueue.ofType(ApplicationEvents.NewYam).flatMap(splitMessages).filter(app.filterMessage).subscribe(app.newYam);
+    eventQueue.ofType(ApplicationEvents.FilterUpdate).subscribe(app.updateFilter); 
+    eventQueue.ofType(ApplicationEvents.NewYamAdded).take(1).subscribe(app.hideWaitingMessage);
+    eventQueue.ofType(ApplicationEvents.Connected).subscribe(app.onConnected);
+    eventQueue.ofType(ApplicationEvents.Reconnected).subscribe(app.onReconnected);    
+    eventQueue.ofType(ApplicationEvents.Reconnecting).subscribe(app.onReconnecting);
 
     // trigger a custom event in our application bus every time the textbox with the filter
     // is updated
@@ -30,7 +64,7 @@
         return(app.filter != $('#filter').val())
       }).
       subscribe(function(data) {
-        eventQueue.push({ message: "filter-update", data: data})
+        eventQueue.push({ message: ApplicationEvents.FilterUpdate, data: data})
       });
 
     // add a tooltip to the filter field
@@ -39,27 +73,24 @@
     // callback for new socket.io data  
     var socket = io.connect('http://' + location.hostname);  
     socket.on('yam', function(data) {
-      eventQueue.push({ message: "new-yam", data: data });
+      eventQueue.push({ message: ApplicationEvents.NewYam, data: data });
     });
 
-    // The server may send more than one yam in the single socket.io message,
-    // so we will split that into an array of a single message each, keeping the same
-    // references, metadata, etc; doing so we can implement message filtering much
-    // more easily
-    var splitMessages = function(message) {
-      var splitData = message.data.messages.map(function(yam) {
-        var data = message;
-        data.data.messages = [ yam ];
-        return(data);
-      });
-
-      return(Bacon.sequentially(0, splitData));
+    //
+    // Socket.io events mapping to Bacon bus events
+    //
+    var BaconEventTransformer = function(message) {
+      return(function() {
+        eventQueue.push({message: message});
+      })
     }
 
-    // wire the events to receivers
-    eventQueue.ofType("new-yam").flatMap(splitMessages).filter(app.filterMessage).subscribe(app.newYam);
-    eventQueue.ofType("filter-update").subscribe(app.updateFilter); 
-    eventQueue.ofType("new-yam-added").take(1).subscribe(app.hideWaitingMessage);   
+    socket.on("connect", BaconEventTransformer(ApplicationEvents.Connected));
+    socket.on("disconnect", BaconEventTransformer(ApplicationEvents.Disconnected));
+    socket.on("connect_failed", BaconEventTransformer(ApplicationEvents.ConnectFailed));
+    socket.on("reconnect_failed", BaconEventTransformer(ApplicationEvents.ReconnectFailed));
+    socket.on("reconnect", BaconEventTransformer(ApplicationEvents.Reconnected))
+    socket.on("reconnecting", BaconEventTransformer(ApplicationEvents.Reconnecting));
   });
 
   var helpers = {
@@ -137,6 +168,21 @@
       return(keep);
     },
 
+    // event handler that is triggered when socket.io connects to the server
+    onConnected: function() {
+      console.log("Connected!");
+    },
+
+    // triggered when socket.io reconnects
+    onReconnected: function() {
+      console.log("Reconnected!");
+    },
+
+    // triggered during socket.io reconnection
+    onReconnecting: function() {
+      //console.log("Reconnecting...");
+    },
+
     // event handler that updates the current filter
     updateFilter: function(v) {    
         app.filter = $('#filter').val();
@@ -163,7 +209,7 @@
 
         // TODO: could we do this with an event?
         //$('.waiting').hide();
-        eventQueue.push({message: "new-yam-added", data:undefined})
+        eventQueue.push({message: ApplicationEvents.NewYamAdded, data:undefined})
     },
 
     // event handler that handles new yams
