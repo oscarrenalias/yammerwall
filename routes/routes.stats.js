@@ -8,6 +8,7 @@ module.exports = function(config) {
 		return(function(req, res) {
 			mongo.getCollection(collection_name).then(function(coll) {
 				coll.find().sort([["value", -1]]).limit(limit).toArray(function(error, data) {
+					// TODO: return a proper HTTP error code
 					res.json(data);
 				})
 			})			
@@ -20,6 +21,17 @@ module.exports = function(config) {
 		top_threads: MongoCollectionRoute("top_threads", 10),
 		top_topics: MongoCollectionRoute("top_topics", 20),
 		hourly_activity: MongoCollectionRoute("hourly_activity", 0),
+
+		recent: function(req, res) {
+			mongo.getCollection("yams").then(function(coll) {
+				// TODO: parameterize this
+				coll.find().sort([["created_at", "desc"]]).limit(15).toArray(function(error, data) {
+					// TODO: return a proper error code
+					res.json(data);
+				})
+			})
+		},
+		
 		ui: function(req, res) {
 			res.render("stats", { user: req.user, config: config, title: "YammerWall | Statistics" });
 		}
