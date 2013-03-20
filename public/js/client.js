@@ -132,6 +132,9 @@
   // UI-related functionality
   var app = {
 
+    // compiled version of the template for new yams
+    yamTemplate: _.template($("#tmpl-yam").html()),
+
     // current filter
     filter: $('#filter').val() || "",
 
@@ -220,7 +223,11 @@
       var users = data.references.users;
       for(i=0; i < yams.length; i++) {
         var yam = yams[i];
-        var newYam = app.formatYam(yam, app.findReference(data.references.users, "user", yam.sender_id), data.references); 
+        //var newYam = app.formatYam(yam, app.findReference(data.references.users, "user", yam.sender_id), data.references); 
+        var newYam = app.yamTemplate({
+          yam: yam, 
+          user: app.findReference(data.references.users, "user", yam.sender_id)[0]
+        });
 
         // insert the new content into the dom and force it to slide down
         $("ul#yams").prepend(newYam);
@@ -242,7 +249,7 @@
       eventQueue.push({message: "new-yam-added", data:yam});
     },
 
-    yamTemplate: '\
+    yamTemplate_OLD: '\
       <li class="yam yam-container shadow"> \
         <div class="yam-mugshot"> \
           <img src="{{user.mugshot_url}}" alt="mugshot" /> \

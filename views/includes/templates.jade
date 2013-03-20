@@ -20,3 +20,54 @@ script(id="tmpl-top-threads", type="text/template")
 	|		<a href="<%= thread._id.web_url %>" title="<%= thread.value%> yams"><%= thread._id.content_excerpt %></a>
 	|	</li>
 	|<% }) %>
+
+script(id="tmpl-yam-full", type="text/template")
+	|<li class="yam yam-container shadow"> 
+	|    <div class="yam-mugshot"> 
+	|      <img src="<%= user.mugshot_url =>" alt="mugshot" /> 
+	|    </div> 
+	|    <div class="yam-body"> 
+	|      <%= yam.body.rich %>
+	|    </div> 
+	|    <% _(yam.attachments).each(function(attachment) { %>
+	|    <div class="yam-attachments"> 
+	|      <% if (attachment.image) { %>
+	|        <div class="yam-attachment yam-attachment-image"> 
+	|          <a href="<%= attachment.image.url %>" alt="<%= attachment.image.original_name %>"> 
+	|            <img src="<%= attachment.image.thumbnail_url %>" alt="Thumbnail" /> 
+	|          </a> 
+	|        </div> 
+	|      <% } else { %>
+	|        <div class="yam-attachment"> 
+	|          <a href="<%= attachment.download_url %>" alt="Attachment"> 
+	|            <% if (attachment["small_icon_url"]) { %><img src="<%= attachment.small_icon_url %>" alt="Icon" /><% } %>
+	|            <%= attachment.full_name %>
+	|          </a> 
+	|        </div> 
+	|      <% } /* if(attachment.image) */ %> 
+	|      <div class="yam-attachment-info"> 
+	|        <%= attachment.full_name %>, <%= helpers.formatSize(attachment.size) %>
+	|      </div> 
+	|    </div> 
+	|    <% } /* _(yam.attachments).each(...) */ %> 
+	|    <div class="yam-info"> 
+	|      Posted by <span class="yam-user"><%= yam.user.full_name %></span> 
+	|      <abbr class="timeago" title="<%= yam.created_at %>"><%= jQuery.timeago(yam.created_at) %></abbr>  
+	|      . <a href="<%= yam.web_url %>">See conversation in Yammer</a>. 
+	|    <div> 
+	|  </li>
+
+script(id="tmpl-yam", type="text/template")
+	|<li class="yam yam-container shadow"> 
+	|    <div class="yam-mugshot"> 
+	|      <img src="<%= user.mugshot_url %>" alt="mugshot" /> 
+	|    </div> 
+	|    <div class="yam-body"> 
+	|      <%= yam.body.rich %>
+	|    </div> 
+	|    <div class="yam-info"> 
+	|      Posted by <span class="yam-user"><%= user.full_name %></span> 
+	|      <abbr class="timeago" title="<%= yam.created_at %>"><%= jQuery.timeago(yam.created_at) %></abbr>  
+	|      . <a href="<%= yam.web_url %>">See conversation in Yammer</a>. 
+	|    <div> 
+	|  </li>
