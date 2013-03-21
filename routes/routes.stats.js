@@ -33,6 +33,7 @@ module.exports = function(config) {
 		top_threads: MongoCollectionRoute("top_threads", 10),
 		top_topics: MongoCollectionRoute("top_topics", 20),
 		hourly_activity: MongoCollectionRoute("hourly_activity", 0, [["_id.s", -1]]),
+		daily_activity: MongoCollectionRoute("daily_activity", 0, [["_id.s", -1 ]]),
 		recent: function(req, res) {
 			mongo.getCollection("yams").then(function(coll) {
 				// TODO: parameterize this

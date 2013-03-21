@@ -38,6 +38,7 @@ app.get("/stats/collections/top_topics", statsRoutes.top_topics)
 app.get("/stats/collections/top_threads", statsRoutes.top_threads)
 app.get("/stats/collections/top_clients", statsRoutes.top_clients)
 app.get("/stats/collections/hourly_activity", statsRoutes.hourly_activity)
+app.get("/stats/collections/daily_activity", statsRoutes.daily_activity)
 app.get("/stats/data/recent", statsRoutes.recent);
 app.get("/stats", statsRoutes.ui)
 
