@@ -1,6 +1,8 @@
-(function(target) {
-
-  var StringUtils = {
+//
+// A handful of helper methods related to strings.
+//
+define(function() {
+  return({
     formatNumber: function( number, decimals, dec_point, thousands_sep ) {
       var n = number, c = isNaN(decimals = Math.abs(decimals)) ? 2 : decimals;
       var d = dec_point == undefined ? "," : dec_point;
@@ -12,15 +14,15 @@
 
     formatSize: function(filesize) {
       if (filesize >= 1073741824) {
-           filesize = StringUtils.formatNumber(filesize / 1073741824, 2, '.', '') + ' Gb';
+           filesize = this.formatNumber(filesize / 1073741824, 2, '.', '') + ' Gb';
       } else { 
         if (filesize >= 1048576) {
-            filesize = StringUtils.formatNumber(filesize / 1048576, 2, '.', '') + ' Mb';
+            filesize = this.formatNumber(filesize / 1048576, 2, '.', '') + ' Mb';
         } else { 
           if (filesize >= 1024) {
-            filesize = StringUtils.formatNumber(filesize / 1024, 0) + ' Kb';
+            filesize = this.formatNumber(filesize / 1024, 0) + ' Kb';
           } else {
-            filesize = StringUtils.formatNumber(filesize, 0) + ' bytes';
+            filesize = this.formatNumber(filesize, 0) + ' bytes';
           };
         };
       };
@@ -34,9 +36,5 @@
       console.log("text = " + text + ", word = " + word + ", match = " + match);
       return(match != -1);
     }
-  }
-
-  // Expose our object to the global scope
-  target.StringUtils = StringUtils
-
-})(window);
+  });
+});
