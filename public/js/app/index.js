@@ -1,9 +1,10 @@
 //
 // Instantiates and runs the application that is responsible for the index ("/") page. The actual implementation of the
-// application is avaliable in index/main.js
+// applications are avaliable in index/main.js and stats/main.js
 //
-define(["index/main"], function(app) {
+define(["index/main", "stats/main"], function(indexApp, statsApp) {
   $(document).ready(function() {
-    app.init();
+      indexApp.init();
+      statsApp.init();
   });
 })
