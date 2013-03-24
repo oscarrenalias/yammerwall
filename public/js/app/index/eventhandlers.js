@@ -6,21 +6,6 @@ define(["index/eventqueue", "index/events", "common/templates"], function(eventQ
 		// current filter
 		filter: $('#filter').val() || "",
 
-		// event handler that is triggered when socket.io connects to the server
-		onConnected: function() {
-		    console.log("Connected!");
-		},
-		
-		// triggered when socket.io reconnects
-		onReconnected: function() {
-		    console.log("Reconnected!");
-		},
-		
-		// triggered during socket.io reconnection
-		onReconnecting: function() {
-		    //console.log("Reconnecting...");
-		},
-
 		// event handler that handles new yams
 		onNewYam: function(message) {
 		    var yam = message.value;

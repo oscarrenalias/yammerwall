@@ -6,7 +6,12 @@
 // Bacon events, that get shoved into a Bacon.Bus event bus for further processing. The EventHandlers module
 // provides event hanlers for the exposed events
 //
-define(["common/stringutils", "index/eventqueue", "index/events", "index/eventhandlers"], function(StringUtils, eventQueue, Events, EventHandlers) {
+define(["common/stringutils", 
+		"index/eventqueue", 
+		"index/events", 
+		"index/eventhandlers",
+		"index/statushandler",
+		], function(StringUtils, eventQueue, Events, EventHandlers) {
     var app = {
       
       // Use Bacon's own Bus to handle event generation, handling and filtering within our application
@@ -54,9 +59,6 @@ define(["common/stringutils", "index/eventqueue", "index/events", "index/eventha
 		eventQueue.ofType(Events.NewYam).flatMap(splitMessages).filter(app.filterMessage).subscribe(EventHandlers.onNewYam);
 		eventQueue.ofType(Events.FilterUpdate).subscribe(EventHandlers.onUpdatedFilter); 
 		eventQueue.ofType(Events.NewYamAdded).take(1).subscribe(EventHandlers.onNewYamAdded);
-		eventQueue.ofType(Events.Connected).subscribe(EventHandlers.onConnected);
-		eventQueue.ofType(Events.Reconnected).subscribe(EventHandlers.onReconnected);
-		eventQueue.ofType(Events.Reconnecting).subscribe(EventHandlers.onReconnecting);
 
 		// trigger a custom event in our application bus every time the textbox with the filter
 		// is updated
@@ -74,7 +76,6 @@ define(["common/stringutils", "index/eventqueue", "index/events", "index/eventha
 		    .subscribe(function(data) {
 				eventQueue.publish({ message: Events.FilterUpdate, data: data})
 		    })
-
 		
 		// Convert socket.io events to custom application events
 		this.socket.on("yam", eventQueue.mapToMessage(Events.NewYam));
