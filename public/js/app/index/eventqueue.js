@@ -11,11 +11,11 @@ define(function() {
 			eventQueue.push(message);
 		},
 
-		subscribe: function(callback) {
-			return(eventQueue.subscribe(callback))
+		subscribe: function(event, callback) {
+			return(this.ofType(event).subscribe(callback));
 		},
 
-		// handy function for doing the filtering	
+		// handy function for doing the filtering
 		ofType: function(type) {
   			return(eventQueue.filter(function(message) {
   				return(message.message == type);
@@ -27,6 +27,6 @@ define(function() {
 			return(function(data) {
 				eventQueue.push({message: message, data: data});
         	})
-		}  		  
+		}
 	})
 })
