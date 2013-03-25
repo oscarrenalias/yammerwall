@@ -8,7 +8,7 @@ exports.network_domain = process.env.OWN_NETWORK
 // Keep in mind that this is a function, so we can actually implement some kind of smart logic
 // to determine whether we're in "dev" or "prod" mode if needed
 exports.mode = function() {
-	return("dev");
+	return("prod");
 }
 
 exports.ui = {
