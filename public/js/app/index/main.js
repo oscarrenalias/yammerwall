@@ -9,9 +9,10 @@
 define(["common/stringutils", 
 		"index/eventqueue", 
 		"index/events", 
-		"index/eventhandlers",
+		"index/uihandler",
 		"index/statushandler",
-		], function(StringUtils, eventQueue, Events, EventHandlers) {
+		"index/loadinghandler",
+		"common/logger"], function(StringUtils, eventQueue, Events, UIHandler, StatusHandler, LoadingHandler, log) {
     var app = {
       
       // Use Bacon's own Bus to handle event generation, handling and filtering within our application
@@ -24,7 +25,7 @@ define(["common/stringutils",
       // Initializes the application
       //
       init: function() {
-	  console.log("Initializing the application");
+	  log.info("Initializing the application");
 	  
 	  $('a.live-tipsy').tipsy({
               live: true,
@@ -55,10 +56,15 @@ define(["common/stringutils",
     	return(Bacon.sequentially(0, denormalizedData));
 		} 
 
-		// wire our custom events (from the DOM or socke.io) to receivers
-		eventQueue.ofType(Events.NewYam).flatMap(splitMessages).filter(app.filterMessage).subscribe(EventHandlers.onNewYam);
-		eventQueue.ofType(Events.FilterUpdate).subscribe(EventHandlers.onUpdatedFilter); 
-		eventQueue.ofType(Events.NewYamAdded).take(1).subscribe(EventHandlers.onNewYamAdded);
+		// when a message is received from socket.io, split it into smaller yams and push it again in a
+		// more consumable format (since ther server may pack a big bunch of messages into one, in 
+		// normalized format)		
+		eventQueue.ofType(Events.MessageReceived).flatMap(splitMessages).subscribe(function(message) {
+			eventQueue.publish({message: Events.NewYam, data: message.value});
+		})
+		
+		// notify that the application has started
+		eventQueue.publish({message: Events.ApplicationStarted})
 
 		// trigger a custom event in our application bus every time the textbox with the filter
 		// is updated
@@ -78,7 +84,7 @@ define(["common/stringutils",
 		    })
 		
 		// Convert socket.io events to custom application events
-		this.socket.on("yam", eventQueue.mapToMessage(Events.NewYam));
+		this.socket.on("yam", eventQueue.mapToMessage(Events.MessageReceived));
 		this.socket.on("connect", eventQueue.mapToMessage(Events.Connected));
 		this.socket.on("disconnect", eventQueue.mapToMessage(Events.Disconnected));
 		this.socket.on("connect_failed", eventQueue.mapToMessage(Events.ConnectFailed));

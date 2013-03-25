@@ -8,7 +8,7 @@ exports.network_domain = "accenture.com";
 // Keep in mind that this is a function, so we can actually implement some kind of smart logic
 // to determine whether we're in "dev" or "prod" mode if needed
 exports.mode = function() {
-	return("prod");
+	return("dev");
 }
 
 exports.ui = {
@@ -25,7 +25,7 @@ exports.auth = {
 	//	"basic" - use HTTP basic auth, using the user and password provided below
 	//	"oauth" - enable Yammer OAuth2 authentication
 	//
-	type: "none",
+	type: "oauth",
 
 	// HTTP Basic auth configuration
 	basic: {
