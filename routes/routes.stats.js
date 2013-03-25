@@ -37,7 +37,7 @@ module.exports = function(config) {
 		recent: function(req, res) {
 			mongo.getCollection("yams").then(function(coll) {
 				// TODO: parameterize this
-				coll.find().sort([["created_at", "desc"]]).limit(15).toArray(MongoJSONResponseHandler(res));
+				coll.find().sort([["created_at", "desc"]]).limit(10).toArray(MongoJSONResponseHandler(res));
 			})
 		},
 		
