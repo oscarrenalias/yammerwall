@@ -3,6 +3,8 @@
 //
 define(function() {
     return({
+    	ApplicationStarted: "application-started",
+    	MessageReceived: "message-received",
 		NewYam: "new-yam",
 		NewYamAdded: "new-yam-added",
 		FilterUpdate: "filter-update",

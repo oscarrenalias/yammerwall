@@ -1,14 +1,35 @@
 //
 // This module provides the event handlers for the application events
 //
-define(["index/eventqueue", "index/events", "common/templates"], function(eventQueue, Events, Templates) {
+define(["index/eventqueue", 
+		"index/events", 
+		"common/templates",
+		"common/logger"
+		], function(eventQueue, Events, Templates, log) {
+    
     var EventHandlers = {
 		// current filter
 		filter: $('#filter').val() || "",
 
+		// This event is notified when the application starts, and it is used to retrieve
+		// the 10 or so most recent yams so that there's some content on the screen
+		onApplicationStarted: function(message) {		
+			log.info("Initializing application. Retrieving recent yams.");
+
+			$.get("/stats/data/recent").
+			done(function(data, textStatus, jqXHR) {
+				_(data).each(function(yam) {
+					eventQueue.publish({message: Events.NewYam, data: yam});
+				})
+			}).
+			fail(function() {
+				log.error("There was an error refreshing the most recent yams");
+			})
+		},
+
 		// event handler that handles new yams
 		onNewYam: function(message) {
-		    var yam = message.value;
+		    var yam = message.value.data;
 		    //var newYam = this.yamTemplate({yam: yam});
 		    var newYam = Templates.yam({yam: yam});
 		    
@@ -19,12 +40,12 @@ define(["index/eventqueue", "index/events", "common/templates"], function(eventQ
 		    $("ul#yams li:first abbr.timeago").timeago();
 		    // for images, attach fancybox
 		    $("ul#yams li:first .yam-attachment-image a").fancybox({
-			overlayShow: true,
-			overlayOpacity: 0.85,
-			overlayColor: "#222",
-			titleShow: true,
-			transitionIn: "none",       
-			transitionOut: "none"
+				overlayShow: true,
+				overlayOpacity: 0.85,
+				overlayColor: "#222",
+				titleShow: true,
+				transitionIn: "none",       
+				transitionOut: "none"
 		    });
 		    
 		    eventQueue.publish({message: Events.NewYamAdded, data:yam});
@@ -55,12 +76,12 @@ define(["index/eventqueue", "index/events", "common/templates"], function(eventQ
 
             eventQueue.publish({message: Events.NewYamAdded, data:undefined})
 		},
-
-		onNewYamAdded: function() {
-		    // Hides the waiting message when a new yam or separator is added to the timeline
-		    $('.waiting').hide();
-		}
     }
+
+    // Subscribe to the events that we're interested in
+    eventQueue.subscribe(Events.ApplicationStarted, EventHandlers.onApplicationStarted);
+    eventQueue.subscribe(Events.NewYam, EventHandlers.onNewYam);
+    eventQueue.subscribe(Events.FilterUpdate, EventHandlers.onUpdatedFilter); 
 
     return(EventHandlers);
 });

@@ -33,7 +33,6 @@ define(function() {
     matchWord: function(text, word) {
       // not very efficient, but it seems to work for now
       var match = text.split(/[\s,!;:?]+/).indexOf(word);
-      console.log("text = " + text + ", word = " + word + ", match = " + match);
       return(match != -1);
     }
   });

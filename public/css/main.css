@@ -260,3 +260,12 @@ a.navbar-link:hover {
 .disconnected {
 	background-color: #f25a0d;
 }
+
+/*
+ Loading indicator
+*/
+#loadingstatus {
+	color: #D1D1D1;
+	padding: 10px 10px 0 35%;
+	position: fixed;
+}
