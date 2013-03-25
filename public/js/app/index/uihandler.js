@@ -18,7 +18,7 @@ define(["index/eventqueue",
 
 			$.get("/stats/data/recent").
 			done(function(data, textStatus, jqXHR) {
-				_(data).each(function(yam) {
+				_(data.reverse()).each(function(yam) {
 					eventQueue.publish({message: Events.NewYam, data: yam});
 				})
 			}).
