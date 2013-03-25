@@ -234,3 +234,38 @@ a.navbar-link:hover {
 #top-threads li {
 	padding-bottom: 1em;
 }
+
+/*
+ Connection status
+ */
+#connstatus {
+	position:fixed;
+	top: 0.5em;
+	right: 0.5em;
+	color: black;
+	z-index: 9999;
+	padding-left: 3px;
+	padding-right: 3px;
+	font-size: 10px;
+}
+
+.connecting {
+	background-color: #f4ed94;
+}
+
+.connected {
+	background-color: #b2f06a;
+}
+
+.disconnected {
+	background-color: #f25a0d;
+}
+
+/*
+ Loading indicator
+*/
+#loadingstatus {
+	color: #D1D1D1;
+	padding: 10px 10px 0 35%;
+	position: fixed;
+}

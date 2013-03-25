@@ -1,5 +1,4 @@
-include includes/templates
-include includes/javascript
+script(data-main="js/app/index", src="js/libs/require.js")
 
 div.navbar.navbar-fixed-top
 	div.navbar-inner-custom
@@ -8,21 +7,26 @@ div.navbar.navbar-fixed-top
 			||
 			input.input-large.filter#filter(type="search", data-content="Use this filter to specify a tag or specific word to filter; only yams that contain the text will be displayed and all other ones will be ignored. Delete the content to display all yams again. The '!' operator can be used to filter only the yams that do not contain the given word", data-placement="bottom", data-animation="true", data-trigger="hover", data-title="Filter")
 
-		- if(config.auth.disabled == false)
+		p
+			div#loadingstatus
+				img(src="images/ajax-loader-dark.gif", alt="Spinner")
+				| Waiting for yams...
+
+
+		- if(config.auth.type != "none")
 			p.navbar-text.pull-right
 				img(src="#{user._json.mugshot_url}", alt="").mugshot
 				a(href="#").navbar-link #{user.displayName}			
 				||
 				a(href="/logout").navbar-link Logout
 
+div#connstatus.connecting
+
 div.container-fluid
 	div.row-fluid
 		- if(config.analytics.show_in_front_page == true)
-			div.span9
-				ul#yams
-				span.waiting
-					img(src="images/ajax-loader.gif", alt="Spinner")
-					| Waiting for yams...
+			div.span9				
+				ul#yams				
 
 			div.span3
 				div.stats
@@ -44,8 +48,5 @@ div.container-fluid
 		- else
 			div.span2
 			div.span8
-				span.waiting
-					img(src="images/ajax-loader.gif", alt="Spinner")
-					| Waiting for yams...
 				ul#yams
 			div.span2
