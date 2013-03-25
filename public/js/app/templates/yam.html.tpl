@@ -29,7 +29,7 @@
     <% }) %> 	
     <div class="yam-info"> 
       Posted by <span class="yam-user"><%= yam.sender.full_name %></span> 
-      <abbr class="timeago" title="<%= yam.created_at %>"><%= jQuery.timeago(yam.created_at) %></abbr>  
+      <abbr class="timeago" title="<%= yam.created_at %>"><%= jQuery.timeago(yam.created_at) %></abbr>.
 	   <% if (yam.replied_to) { %>		  
 		    <% if(yam.replied_to.sender) { %>
           <a href="#" class="live-tipsy" title="<%= yam.replied_to.body.plain %>">in reply to</a>
