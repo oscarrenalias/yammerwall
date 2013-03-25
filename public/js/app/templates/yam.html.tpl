@@ -14,9 +14,7 @@
           </a> 
         </div> 
         <div class="yam-attachment-info"> 
-          <%= attachment.full_name %>, <% require(["common/stringutils"], function(StringUtils) { 
-            print(StringUtils.formatSize(attachment.size)) 
-        }) %>
+          <%= attachment.full_name %>
       </div>        
       <% } else { %>
         <div class="yam-attachment"> 
