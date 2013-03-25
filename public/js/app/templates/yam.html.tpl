@@ -33,7 +33,7 @@
       <abbr class="timeago" title="<%= yam.created_at %>"><%= jQuery.timeago(yam.created_at) %></abbr>  
 	   <% if (yam.replied_to) { %>
 		  <a href="#" class="live-tipsy" title="<%= yam.replied_to.body.plain %>">in reply to</a> 
-		  <%= yam.replied_to.sender.full_name %>
+		  <% if(yam.replied_to.sender) { %><%= yam.replied_to.sender.full_name %><% } %>
 	   <% } %>. <a href="<%= yam.web_url %>">See conversation in Yammer</a>. 
     <div> 
 </li>
