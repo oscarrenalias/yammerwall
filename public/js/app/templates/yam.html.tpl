@@ -13,27 +13,30 @@
             <img src="<%= attachment.image.thumbnail_url %>" alt="Thumbnail" /> 
           </a> 
         </div> 
+        <div class="yam-attachment-info"> 
+          <%= attachment.full_name %>, <% require(["common/stringutils"], function(StringUtils) { 
+            print(StringUtils.formatSize(attachment.size)) 
+        }) %>
+      </div>        
       <% } else { %>
         <div class="yam-attachment"> 
-          <a href="<%= attachment.download_url %>" alt="Attachment"> 
-            <% if (attachment["small_icon_url"]) { %><img src="<%= attachment.small_icon_url %>" alt="Icon" /><% } %>
-            <%= attachment.full_name %>
+          <a href="<%= attachment.web_url %>" alt="Attachment">             
+            <%= attachment.web_url %>
           </a> 
         </div> 
-      <% } /* if(attachment.image) */ %>	
-      <div class="yam-attachment-info"> 
-        <%= attachment.full_name %>, <% require(["common/stringutils"], function(StringUtils) { 
-		print(StringUtils.formatSize(attachment.size)) 
-	}) %>
-      </div> 
+      <% } /* if(attachment.image) */ %>	 
     </div> 
     <% }) %> 	
     <div class="yam-info"> 
       Posted by <span class="yam-user"><%= yam.sender.full_name %></span> 
       <abbr class="timeago" title="<%= yam.created_at %>"><%= jQuery.timeago(yam.created_at) %></abbr>  
-	   <% if (yam.replied_to) { %>
-		  <a href="#" class="live-tipsy" title="<%= yam.replied_to.body.plain %>">in reply to</a> 
-		  <% if(yam.replied_to.sender) { %><%= yam.replied_to.sender.full_name %><% } %>
-	   <% } %>. <a href="<%= yam.web_url %>">See conversation in Yammer</a>. 
+	   <% if (yam.replied_to) { %>		  
+		    <% if(yam.replied_to.sender) { %>
+          <a href="#" class="live-tipsy" title="<%= yam.replied_to.body.plain %>">in reply to</a>
+          <%= yam.replied_to.sender.full_name %>.
+        <% } else { %>
+          <a href="#" class="live-tipsy" title="<%= yam.replied_to.body.plain %>">in conversation</a>.
+        <% } %>
+	   <% } %> <a href="<%= yam.web_url %>">See conversation in Yammer</a>. 
     <div> 
 </li>
