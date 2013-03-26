@@ -1,7 +1,7 @@
 yammer-push-node
 ================
 
-Small Node.js application that uses the Yammer real-time push API (https://developer.yammer.com/api/realtime.html) to retrieve the contents of the "All company" feed and display them as a stream of asynchronous updates in the browser in a way that the application can be used as part of Yammer dashboards or in an walls/screen in events (a "Yammer wall").
+Small Node.js application that uses the Yammer real-time push API (https://developer.yammer.com/api/realtime.html) to retrieve the contents of the "All company" feed, a single topic or a group and displays them as a stream of asynchronous updates in the browser, in a way that the application can be used as part of Yammer dashboards or in an walls/screen in events (a "Yammer wall").
 
 Requirements
 ============
@@ -28,7 +28,7 @@ The application supports configurable authentication providers; out of the box, 
 
 OAuth
 -----
-In order to enable OAuth authentication, set ```config.auth.type``` to ```oauth``` and ensure that the application's callback URL is correctly configured in Yammer. The callback URL will be ```http://server.com/auth/yammer/callback```.
+In order to enable OAuth authentication, set ```config.auth.type``` to ```oauth``` and ensure that the application's callback URL is correctly configured in Yammer. The callback URL will be ```http://server.com/auth/yammer/callback``.
 
 If you have already configured your Yammer client secret and application key, no further configuration is necessary.
 
