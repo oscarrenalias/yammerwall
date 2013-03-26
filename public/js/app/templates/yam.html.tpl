@@ -18,22 +18,22 @@
       </div>        
       <% } else { %>
         <div class="yam-attachment"> 
-          <a href="<%= attachment.web_url %>" alt="Attachment">             
-            <%= attachment.web_url %>
-          </a> 
+          Link: <a href="<%= attachment.web_url %>" alt="Attachment">             
+            <% print(StringUtils.shortenString(attachment.web_url, 80, "...")) %>
+          </a>          
         </div> 
       <% } /* if(attachment.image) */ %>	 
     </div> 
     <% }) %> 	
     <div class="yam-info"> 
       Posted by <span class="yam-user"><%= yam.sender.full_name %></span> 
-      <abbr class="timeago" title="<%= yam.created_at %>"><%= jQuery.timeago(yam.created_at) %></abbr>.
+      <abbr class="timeago" title="<%= yam.created_at %>"><%= jQuery.timeago(yam.created_at) %></abbr>
 	   <% if (yam.replied_to) { %>		  
 		    <% if(yam.replied_to.sender) { %>
-          <a href="#" class="live-tipsy" title="<%= yam.replied_to.body.plain %>">in reply to</a>
+          , <a href="#" class="live-tipsy" title="<%= yam.replied_to.body.plain %>">in reply to</a>
           <%= yam.replied_to.sender.full_name %>.
         <% } else { %>
-          <a href="#" class="live-tipsy" title="<%= yam.replied_to.body.plain %>">in conversation</a>.
+          , <a href="#" class="live-tipsy" title="<%= yam.replied_to.body.plain %>">in conversation</a>.
         <% } %>
 	   <% } %> <a href="<%= yam.web_url %>">See conversation in Yammer</a>. 
     <div> 
