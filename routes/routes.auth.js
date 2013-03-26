@@ -4,7 +4,7 @@
 module.exports = function(config) {
 	return {
 		login: function(req, res){
-			res.render('login', { user: req.user, title: "Login" });
+			res.render('login', { user: req.user, title: "Login", config: config });
 		},
 
 		// successful log in

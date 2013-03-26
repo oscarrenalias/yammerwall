@@ -4,8 +4,9 @@
 define(["index/eventqueue", 
 		"index/events", 
 		"common/templates",
-		"common/logger"
-		], function(eventQueue, Events, Templates, log) {
+		"common/logger",
+		"common/stringutils"
+		], function(eventQueue, Events, Templates, log, StringUtils) {
     
     var EventHandlers = {
 		// current filter
@@ -31,7 +32,7 @@ define(["index/eventqueue",
 		onNewYam: function(message) {
 		    var yam = message.value.data;
 		    //var newYam = this.yamTemplate({yam: yam});
-		    var newYam = Templates.yam({yam: yam});
+		    var newYam = Templates.yam({yam: yam, StringUtils: StringUtils});
 		    
 		    // insert the new content into the dom and force it to slide down
 		    $("ul#yams").prepend(newYam);
@@ -50,38 +51,11 @@ define(["index/eventqueue",
 		    
 		    eventQueue.publish({message: Events.NewYamAdded, data:yam});
 		},
-
-		// event handler that updates the current filter
-		onUpdatedFilter: function(v) {    
-            filter = $('#filter').val();
-	            
-            var text = "Filter: " + filter;
-            if(filter.charAt(0) === "!")
-				text = "Filter: NOT " + filter.substr(1, filter.length);
-            if(filter == "")
-				text = "Showing all";
-	            
-            // if the top-most item in the list is already a separator, let's not add
-            // a new one but change its content to avoid an ugly-looking list of separator
-            // after separator
-            var firstItemSelector = "ul#yams li:first";
-            if($(firstItemSelector).hasClass('separator')) {
-				$(firstItemSelector).text(text);
-			} 
-			else {
-				// add as a new item to the list
-				$('ul#yams').prepend("<li class='separator'>" + text + "</li>");
-				$(firstItemSelector).hide().slideDown("slow");          
-            }     
-
-            eventQueue.publish({message: Events.NewYamAdded, data:undefined})
-		},
     }
 
     // Subscribe to the events that we're interested in
     eventQueue.subscribe(Events.ApplicationStarted, EventHandlers.onApplicationStarted);
     eventQueue.subscribe(Events.NewYam, EventHandlers.onNewYam);
-    eventQueue.subscribe(Events.FilterUpdate, EventHandlers.onUpdatedFilter); 
 
     return(EventHandlers);
 });

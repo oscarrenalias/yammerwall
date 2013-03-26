@@ -2,7 +2,7 @@ script(data-main="js/app/stats", src="js/libs/require.js")
 
 div.navbar.navbar-fixed-top
 	div.navbar-inner-custom
-		a(href="#").logo YammerWall // Statistics
+		a(href="#").logo #{config.ui.title} // Statistics
 
 div.container-fluid
 	div.row-fluid
@@ -13,16 +13,13 @@ div.container-fluid
 					ul#top-users
 						li
 							img(src="images/ajax-loader-dark.gif", alt="Spinner") 
-							| Waiting...
 				span.title Most active topics
 				ul#top-topics
 					li 
 						img(src="images/ajax-loader-dark.gif", alt="Spinner") 
-						| Waiting...
 				span.title Most active threads
 				ul#top-threads
 					li 
 						img(src="images/ajax-loader-dark.gif", alt="Spinner") 
-						| Waiting...
 		div.span2
 			

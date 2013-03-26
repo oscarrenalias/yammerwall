@@ -2,11 +2,7 @@ script(data-main="js/app/index", src="js/libs/require.js")
 
 div.navbar.navbar-fixed-top
 	div.navbar-inner-custom
-		a(href="#").logo YammerWall
-		- if(config.ui.show_search) 
-			||
-			input.input-large.filter#filter(type="search", data-content="Use this filter to specify a tag or specific word to filter; only yams that contain the text will be displayed and all other ones will be ignored. Delete the content to display all yams again. The '!' operator can be used to filter only the yams that do not contain the given word", data-placement="bottom", data-animation="true", data-trigger="hover", data-title="Filter")
-
+		a(href="#").logo #{config.ui.title}
 		p
 			div#loadingstatus
 				img(src="images/ajax-loader-dark.gif", alt="Spinner")
@@ -34,17 +30,14 @@ div.container-fluid
 					ul#top-users
 						li
 							img(src="images/ajax-loader-dark.gif", alt="Spinner") 
-							| Waiting...
 					span.title Most active topics
 					ul#top-topics
 						li 
 							img(src="images/ajax-loader-dark.gif", alt="Spinner") 
-							| Waiting...
 					span.title Most active threads
 					ul#top-threads
 						li 
 							img(src="images/ajax-loader-dark.gif", alt="Spinner") 
-							| Waiting...							
 		- else
 			div.span2
 			div.span8
