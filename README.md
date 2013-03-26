@@ -28,7 +28,7 @@ The application supports configurable authentication providers; out of the box, 
 
 OAuth
 -----
-In order to enable OAuth authentication, set ```config.auth.type``` to ```oauth``` and ensure that the application's callback URL is correctly configured in Yammer. The callback URL will be ````http://server.com/auth/yammer/callback.
+In order to enable OAuth authentication, set ```config.auth.type``` to ```oauth``` and ensure that the application's callback URL is correctly configured in Yammer. The callback URL will be ```http://server.com/auth/yammer/callback```.
 
 If you have already configured your Yammer client secret and application key, no further configuration is necessary.
 
