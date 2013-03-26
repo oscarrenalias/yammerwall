@@ -1,8 +1,8 @@
-exports.oauth_token = process.env.OAUTH_TOKEN
+exports.oauth_token = process.env.OAUTH_TOKEN;
 
 // Name of the network from which the application is receiving the data; this value
 // is used to validate that users belong to the same network
-exports.network_domain = process.env.OWN_NETWORK
+exports.network_domain = process.env.OWN_NETWORK;
 
 // "dev" or "prod" - dev enables some additional features like sending random yams for testing.
 // Keep in mind that this is a function, so we can actually implement some kind of smart logic
@@ -12,8 +12,6 @@ exports.mode = function() {
 }
 
 exports.ui = {
-	// enable or disable the client-side search box
-	show_search: false,
 	// title to show at the top of the page
 	title: "YammerWall"
 }
