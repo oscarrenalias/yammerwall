@@ -29,6 +29,14 @@ define(function() {
       return filesize;      
     },
 
+    shortenString: function(str, limit, appendText) {
+      var result = str;
+      if(str.length > limit)
+        result = str.substring(0, limit-appendText.length) + appendText
+
+      return(result);
+    },
+
     // does exact word matching in the given string
     matchWord: function(text, word) {
       // not very efficient, but it seems to work for now
