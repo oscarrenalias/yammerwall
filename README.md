@@ -1,7 +1,7 @@
-yammer-push-node
+YammerWall
 ================
 
-Small Node.js application that uses the Yammer real-time push API (https://developer.yammer.com/api/realtime.html) to retrieve the contents of the "All company" feed, a single topic or a group and displays them as a stream of asynchronous updates in the browser, in a way that the application can be used as part of Yammer dashboards or in an walls/screen in events (a "Yammer wall").
+The YammerWall is a Node.js application that uses the Yammer real-time push API (https://developer.yammer.com/api/realtime.html) to retrieve the contents of the "All company" feed, a single topic or a group and displays them as a stream of asynchronous updates in the browser. This application is meant to be used as part of Yammer dashboards or in an walls/screen in events, as a "Yammer wall" (hence the name).
 
 Requirements
 ============
