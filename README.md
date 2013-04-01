@@ -1,23 +1,86 @@
 yammer-push-node
 ================
 
-Small NodeJs application that uses the Yammer push API to retrieve the contents of the "All company" feed. The API uses the cometd/Bayeux protocol to deliver data, and its specifications can be read here: https://developer.yammer.com/api/realtime.html.
-
-In addition to exploring the capabilities of the Yammer push API, this application can be used as part of Yammer dashboards or in an overhead screen in events but keep in mind that while the push API is usually quite close to real time, extended testing has revealed that in certain occasions the delay between the push API and the yammer.com site can be between 10 to 20 minutes.
-
-How it works
-============
-The application opens a single connection to the Yammer Push API using an specified OAuth 2.0 token instead of opening one new connection per user in order to save resources, and this connection to the API will be used to listen to the "All company" feed. If any kind of filtering is needed (e.g. filter for a specific topic) it will be implemented within the application.
-
-Every time new data is received from the API, it will be pre-processed (not all data received from the API is meant for users) and will be delivered to connected clients via Socket.io. 
-
-Users will be authenticated using the OAuth 2.0 process, so they need to be part of a network to be able to use the application (but please see the TODO section) 
+Small Node.js application that uses the Yammer real-time push API (https://developer.yammer.com/api/realtime.html) to retrieve the contents of the "All company" feed, a single topic or a group and displays them as a stream of asynchronous updates in the browser, in a way that the application can be used as part of Yammer dashboards or in an walls/screen in events (a "Yammer wall").
 
 Requirements
 ============
-* Node 0.6.x or newer is required to run the application.
+* Node 0.8.x or newer is required to run the application.
 * A valid OAuth 2.0 token from Yammer
 * An application key and secret, which can be obtained from http://www.yammer.com/client_applications/new
+* A MongoDB database for basic analytics
+
+How it works
+============
+The application opens a single connection to the Yammer Push API using an specified OAuth 2.0 token instead of opening one new connection per user in order to save resources, and this connection to the API will be used to listen to the "All company" feed. 
+
+
+
+ process, so they need to be part of a network to be able to use the application (but please see the TODO section)
+
+Authentication
+==============
+The application supports configurable authentication providers; out of the box, 3 are provided:
+
+* Yammer's OAuth 2.0 provider
+* Basic user/password authentication
+* No authentication
+
+OAuth
+-----
+In order to enable OAuth authentication, set ```config.auth.type``` to ```oauth``` and ensure that the application's callback URL is correctly configured in Yammer. The callback URL will be ```http://server.com/auth/yammer/callback``.
+
+If you have already configured your Yammer client secret and application key, no further configuration is necessary.
+
+Basic authentication
+--------------------
+Basic authentication uses a single user and password combination to allow access to the application.
+
+To enable basic authentication, set ```config.auth.type``` to ```basic``` and set the user and password:
+
+```
+exports.auth = {
+	basic: {
+		user: "testUser",
+		password: "testPassword",
+	}	
+}
+```
+
+No authentication
+-----------------
+Set ```config.auth.type``` to ```none``` to disable authentication. 
+
+Filtering
+=========
+Three types of filtering for yams are supported:
+
+* All - equivalent to the "All company" feed
+* Topic - listen to a single topic/hashtag
+* Group - listen to messages from a single group
+
+All
+---
+Coming soon.
+
+Topic
+-----
+Coming soon.
+
+Group
+-----
+Coming soon.
+
+MongoDB
+=======
+As of the release on 26.03.2013, the application supports storing all yams in a MongoDB database so that some basic analytics can be 
+calculated via Mongo map-reduce jobs (most active users, most active topics, most active threads, client statistis, etc). Stored yams
+are also used to return the most recent yams to clients upon first connection.
+
+Please note that MongoDB is not required if you deactivate the support for analytics by setting ```exports.analytics.enabled``` to ```false``` in config.js. 
+
+MongoDB can be easily installed in the local workstation for local development, please update config.js with the correct
+connection string. Alternatively, use Vagrant to provision a local Virtual Machine with MongoDB: https://github.com/oscarrenalias/vagrant.
 
 Running locally
 ===============
@@ -46,14 +109,15 @@ In this branch, configuration data is no longer configured via config.js but via
 
 Use ```heroku config:add``` to set suitable values for your configuration.
 
+When running in Heroku, the MongoLab add-on is a very convenient way to provision a MongoDB database.
+
+Changelog
+=========
+* 26.03.2013, Major new release with improved functionality as well as support for analytics and storage of yams with MongoDB
+* 24.09.2012, Initial version
+
 TODO
 ====
 Current list of items to be implemented, in no particular order:
 
-* Currently the application is not checking if the static OAuth 2.0 token and the user who just logged in belong to the same network, which means that users could potentially see data from another network even if they do not belong to it. This is a potential security risk and will be addressed shortly, though it should not be a problem for "closed" deployments
-
-* WIP: Implement support for attachments (primarily images). Images and files already working; links and polls are also sent by Yammer as attachments and are currently not supported
-
 * The current layout is not very flexible for mobile devices, probably a stylesheet specific for mobiles should be created
-
-* Add some statistics and analytics, e.g: most active user, most active discussion, most active tag, etc.
