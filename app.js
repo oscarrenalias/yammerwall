@@ -1,9 +1,10 @@
-var express = require('express'),
+var log = require("log4js-config").get("net.renalias.yamer.wall.app"),
+  //log = require("app-logger").get("net.renalias.yammer.wall.app"),
+  express = require('express'),
   app = express.createServer(),        
   port = process.env.PORT || 8081,
   config = require('./config.js'),
   util = require('util'),
-  //passport = require('passport'),
   PushAPIClient = require('./lib/apiclient');
 
 // configure Express
@@ -12,14 +13,18 @@ app.configure(function() {
   app.set('view engine', 'jade');
 
   // access log is a bit too chatty, let's switch it off during developmet
-  if(config.mode() == "prod")   
-    app.use(express.logger()) ;
+  if(config.mode() == "prod") {
+      // Tell Express to use the log4js logger
+      //var log4js = require("log4js");
+      //app.use(require("app-logger").log4js.getLogger("net.renalias.yammer.wall.http"));
+      app.use(require("log4js-config").get("net.renalias.yammer.wall.http"));
+  }
 
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.session({ secret: '*#sURcTCeALkyJPhCv$dCk*d@rav4*A$' }));
-  
+
   // Dynamically configure authentication. The nasty part is that we're passing the 'app' object
   // by reference and modifying it in the auth configuration module... should find a better way to do it
   require("./lib/auth/auth." + config.auth.type + ".js")(app, config);
@@ -52,4 +57,4 @@ pushAPIClient.start();
     
 // start the application
 app.listen(port);
-console.log("Server started in port: " + port);
+log.info("Server started in port: " + port);

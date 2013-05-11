@@ -1,0 +1,14 @@
+{
+    "appenders": [
+        {
+            "type": "console"
+        }
+    ],
+
+    "levels": {
+        "net.renalias.yammer.pushapi": "ERROR",
+        "net.renalias.yammer.pushapi.http": "ERROR",
+        "net.renalias.yammer.wall.app": "ERROR",
+        "net.renalias.yammer.wall.app.clients": "ERROR"
+    }
+}

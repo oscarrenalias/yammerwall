@@ -9,11 +9,12 @@
     "stylus": ">= 0.0.0",
     "jade": ">= 0.0.0",
     "winston": ">= 0.0.0",
-    "yammer-push-api-client": "= 1.0.0",
+    "yammer-push-api-client": "= 1.0.1",
     "yammer-rest-api-client": ">= 0.0.0",
     "underscore": ">= 0.0.0",
     "mongodb": "~1.2.3",
-    "q": "0.9.2"
+    "q": "0.9.2",
+    "log4js-config": "= 0.1.1"
   },
   "engines": {
     "node": "0.8.x"

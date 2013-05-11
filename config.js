@@ -25,7 +25,7 @@ exports.auth = {
 	//	"basic" - use HTTP basic auth, using the user and password provided below
 	//	"oauth" - enable Yammer OAuth2 authentication
 	//
-	type: "oauth",
+	type: "none",
 
 	// HTTP Basic auth configuration
 	basic: {
