@@ -6,9 +6,9 @@
     ],
 
     "levels": {
-        "net.renalias.yammer.pushapi": "ERROR",
-        "net.renalias.yammer.pushapi.http": "ERROR",
-        "net.renalias.yammer.wall.app": "ERROR",
-        "net.renalias.yammer.wall.app.clients": "ERROR"
+        "net.renalias.yammer.pushapi": "ALL",
+        "net.renalias.yammer.pushapi.http": "ALL",
+        "net.renalias.yammer.wall.app": "ALL",
+        "net.renalias.yammer.wall.app.clients": "ALL"
     }
 }
