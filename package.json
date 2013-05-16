@@ -1,6 +1,7 @@
 {
   "name": "yammer-poll-node",
   "version": "0.0.1",
+  "main": "app.js",
   "dependencies": {
     "express": "2.5.x",
     "socket.io": "0.9.x",
@@ -15,6 +16,13 @@
     "mongodb": "~1.2.3",
     "q": "0.9.2",
     "log4js-config": "= 0.1.1"
+  },
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-nodeunit": "latest",
+    "grunt-nodemon": "latest",
+    "nodeunit": "= 0.7.4"
   },
   "engines": {
     "node": "0.8.x"
