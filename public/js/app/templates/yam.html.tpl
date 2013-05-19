@@ -6,16 +6,19 @@
       <%= yam.body.rich %>
     </div>
     <% _(yam.attachments).each(function(attachment) { %>
-    <div class="yam-attachments">  
+    <div class="yam-attachments">
       <% if (attachment.image) { %>
-        <div class="yam-attachment yam-attachment-image"> 
-          <a href="<%= attachment.image.url %>" alt="<%= attachment.image.original_name %>"> 
-            <img src="<%= attachment.image.thumbnail_url %>" alt="Thumbnail" /> 
-          </a> 
-        </div> 
-        <div class="yam-attachment-info"> 
-          <%= attachment.full_name %>
-      </div>        
+        <div class="yam-attachment yam-attachment-image">
+          <% if (config.yam.expand_images == false) { %>
+              <a href="<%= attachment.image.url %>" alt="<%= attachment.image.original_name %>">
+                <img src="<%= attachment.image.thumbnail_url %>" alt="Thumbnail" />
+              </a>
+          <% } else { %>
+              <a href="<%= attachment.image.url %>" alt="<%= attachment.image.original_name %>">
+                <img src="<%= attachment.image.url %>" alt="Image" />
+              </a>
+          <% } %>
+        </div>
       <% } else { %>
         <div class="yam-attachment"> 
           Link: <a href="<%= attachment.web_url %>" alt="Attachment">             

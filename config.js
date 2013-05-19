@@ -25,7 +25,7 @@ exports.auth = {
 	//	"basic" - use HTTP basic auth, using the user and password provided below
 	//	"oauth" - enable Yammer OAuth2 authentication
 	//
-	type: "none",
+	type: "oauth",
 
 	// HTTP Basic auth configuration
 	basic: {
@@ -53,7 +53,7 @@ exports.filter = {
 // Some experimental analytics features
 exports.file_writer = {
 	enabled: false,
-	folder: "./data",
+	folder: "./data"
 }
 
 exports.analytics = {

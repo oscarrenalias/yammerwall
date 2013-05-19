@@ -5,8 +5,9 @@ define(["index/eventqueue",
 		"index/events", 
 		"common/templates",
 		"common/logger",
-		"common/stringutils"
-		], function(eventQueue, Events, Templates, log, StringUtils) {
+		"common/stringutils",
+        "common/config"
+		], function(eventQueue, Events, Templates, log, StringUtils, Config) {
     
     var EventHandlers = {
 		// current filter
@@ -32,7 +33,7 @@ define(["index/eventqueue",
 		onNewYam: function(message) {
 		    var yam = message.value.data;
 		    //var newYam = this.yamTemplate({yam: yam});
-		    var newYam = Templates.yam({yam: yam, StringUtils: StringUtils});
+		    var newYam = Templates.yam({yam: yam, StringUtils: StringUtils, config: Config});
 		    
 		    // insert the new content into the dom and force it to slide down
 		    $("ul#yams").prepend(newYam);
