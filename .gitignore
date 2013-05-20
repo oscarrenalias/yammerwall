@@ -14,7 +14,7 @@ results
 node_modules
 npm-debug.log
 
-config.js
+./config.js
 
 .DS_Store
 *~
