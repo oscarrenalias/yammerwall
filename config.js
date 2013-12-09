@@ -58,7 +58,7 @@ exports.file_writer = {
 
 exports.analytics = {
 	// Control the analytics jobs and processing
-	enabled: true,
+	enabled: false,
 
 	// Whether some of the analytics data should be shown in the front page
 	show_in_front_page: true,
